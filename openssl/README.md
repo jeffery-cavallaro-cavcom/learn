@@ -67,3 +67,25 @@ necessary to specify the actual domain.
     # chmod 500 reqs/cavcom
     # chmod 400 reqs/cavcom/*
     ```
+
+## Adding the Root Key to the Java Trust Store
+
+Java applications that use the Java PKI facility will need to have the root
+CA public key added to the default trust store.  The trust store is a JKS
+trust store file located in `$JAVA_HOME/lib/security/cacerts`.  Note that
+this is probably a link to something like the following:
+
+``` bash
+# keytool -import -trustcacerts -alias cavcom -file /opt/ca/cacert.pem -keystore /etc/ssl/certs/java/cacerts
+```
+
+## Convert Private Key to RSA Format
+
+Some applications require that the PKCS#8 formatted private key be in
+PKCS#1 format - this means that the PEM file must start and end with:
+`BEGIN RSA PRIVATE KEY` instead of `BEGIN PRIVATE KEY`.  This can be
+accomplished with the following command:
+
+``` bash
+openssl rsa -in key.pem -out key-rsa.pem
+```
