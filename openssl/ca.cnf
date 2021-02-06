@@ -36,11 +36,16 @@ serial = ${dir}/serial/serial
 
 database = ${dir}/index/index.txt
 
+# This is where the CA stores the certs that it has issued.  Each cert file
+# name matches the cert's serial number.
+
+new_certs_dir = ${dir}/certs
+
 # These options indicate that all options are as specified in the root CA
 # definition - there are no overrides elsewhere.
 
-name_opt = root_ca
-cert_opt = root_ca
+name_opt = ca_default
+cert_opt = ca_default
 
 # Default values for the openssl ca command.  These values are applied when
 # constructing issued certs.
@@ -106,7 +111,7 @@ authorityKeyIdentifier = keyid:always,issuer:always
 # request command line.
 
 default_bits = 2048
-default_keyfile = ${dir}/private/privkey.pem
+default_keyfile = ${dir}/private/cakey.pem
 string_mask = utf8only
 
 # The FQDN for the root CA.  All fields are specified, so do not prompt.
@@ -135,6 +140,6 @@ emailAddress = jeffery@cavcom.com
 [ ca_extensions ]
 
 basicConstraints = critical,CA:true
-subjectKeyIdentifier=hash
-authorityKeyIdentifier=keyid:always,issuer:always
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always, issuer:always
 keyUsage = cRLSign, keyCertSign

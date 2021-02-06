@@ -12,6 +12,7 @@ procedure should be performed as root with a strict umask (e.g., 077).
     # mkdir /opt/ca/private
     # mkdir /opt/ca/index
     # mkdir /opt/ca/serial
+    # mkdir /opt/ca/certs
     # touch /opt/ca/index/index.txt
     # echo '01' > /opt/ca/serial/serial
     ```
@@ -36,4 +37,33 @@ procedure should be performed as root with a strict umask (e.g., 077).
 1. To view the details of the new cert:
     ``` bash
     # openssl x509 -text -noout -in cacert.pem
+    ```
+
+## Requesting and Issuing a New Server Certificate
+
+1. Create a separate request directory for the new server cert:
+   ```bash
+   # cd /opt/ca
+   # mkdir -p reqs/cavcom
+   # cd reqs/cavcom
+   ```
+1. Copy the server request configuration to this directory and update as
+necessary to specify the actual domain.
+    ```bash
+    # cp cavcom.cnf /opt/ca/reqs/cavcom/
+    ```
+1. Generate the server request:
+    ```bash
+    # openssl req -config cavcom.cnf -new -newkey rsa -days 3650 -nodes -out cavcomreq.pem
+    ```
+1. Use the new request to generate the new server cert:
+    ```bash
+    # cd /opt/ca
+    # openssl ca -config ca.cnf -notext -in reqs/cavcom/cavcomreq.pem -out reqs/cavcom/cavcomcert.pem
+    ```
+1. Lock down the new server cert information.
+
+    ``` bash
+    # chmod 500 reqs/cavcom
+    # chmod 400 reqs/cavcom/*
     ```

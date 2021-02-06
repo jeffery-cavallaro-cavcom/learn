@@ -1,0 +1,34 @@
+[ req ]
+
+default_bits = 2048
+default_keyfile = /opt/ca/reqs/cavcom/cavcomkey.pem
+default_md = sha256
+string_mask = utf8only
+
+distinguished_name = server_fqdn
+prompt = no
+
+x509_extensions = server_extensions
+
+[ server_fqdn ]
+
+countryName = US
+stateOrProvinceName = CA
+localityName = Fremont
+organizationName = CAVCOM
+organizationalUnitName = Software Engineering
+commonName = *.cavcom.com
+emailAddress = jeffery@cavcom.com
+
+[ server_extensions ]
+
+basicConstraints = critical,CA:false
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always, issuer:always
+keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+
+DNS.1 = *.cavcom.com
