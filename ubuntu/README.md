@@ -5,11 +5,13 @@
 disk|partition|size
 ---|---|---
 1|/boot/efi|200 Mb
-1|/|400 Gb
+1|/|100 Gb
 1|swap|10 Gb
+1|/usr|500 Gb
 1|/tmp|10 Gb
 1|/var|10 Gb
-1|/usr/local | rest
+1|/opt|100 Gb
+1|/srv|rest
 2|/home|whole
 
 ## Accounts
@@ -43,7 +45,7 @@ and errors on startup.  Use the apt-get version (26).
 Set the following options from either the menu or by editing the `/.emacs
 file:
 
-``` emacs-lisp
+```emacs-lisp
 (custom-set-variables
  '(default-frame-alist (quote ((width . 80) (height . 25))))
  '(fill-column 79)
@@ -62,7 +64,7 @@ This is a shell script to clean up emacs turds:
 
 ``` bash
 $ mdkir ~/bin
-$ echo 'find . -name \*~ -exec rm \{\} \; -print' > ~/bin/clean
+$ echo 'find . \( -name \*~ -o -name .\*~ -o -name \#\* \) -exec rm \{\} \; -print' > ~/bin/clean
 $ chmod +x ~/bin/clean
 ```
 
@@ -146,7 +148,7 @@ Add the following line to `~\.emacs` so that GFM mode is the default for
 Install Git and all of its associated GUIs and tools:
 
 ``` bash
-# apt-get install git-all
+# apt-get install git
 ```
 
 ### Global Configuration
@@ -157,6 +159,26 @@ The following commands will write global settings to `~/.gitconfig`:
 $ git config --global user.name "Jeffery Cavallaro"
 $ git config --global user.email "jeffery@cavcom.com"
 $ git config --global core.editor "emacs"
+```
+
+## DNS
+
+The presence of connection manager makes things a little different.  First,
+make sure that the basic network settings are correct using the connection
+manager icon in the upper right corner.  Then, for additional settings like
+the search domain, access the connection manager editor:
+
+``` bash
+# nm-connection-editor
+```
+
+## ssh
+
+If not installed, install and enable ssh support:
+
+``` bash
+# apt-get install ssh
+# apt-get enable ssh
 ```
 
 ## Virtualbox
