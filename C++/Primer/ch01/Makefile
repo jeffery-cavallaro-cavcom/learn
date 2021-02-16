@@ -1,17 +1,27 @@
 CXX = g++
 CXXFLAGS = -Wall
 LINT = cpplint
+LINTARGS = --root C++
 
-PROGRAMS = hello
+PROGRAMS = hello add
 
-SOURCES = hello.cc
+LIBRARIES = libutil.a
 
-all:	$(PROGRAMS)
+SOURCES = input.h input.cc hello.cc
 
-hello:	hello.cc
+all: $(LIBRARIES) $(PROGRAMS)
+
+libutil.a: input.o
+	$(AR) $(ARFLAGS) $@ $^
+
+input.o: input.h input.cc
+
+hello: hello.cc
+
+add: add.cc $(LIBRARIES)
 
 lint:
-	$(LINT) $(SOURCES)
+	$(LINT) $(LINTARGS) $(SOURCES)
 
 clean:
-	rm $(PROGRAMS)
+	rm -rf *.o $(LIBRARIES) $(PROGRAMS)
