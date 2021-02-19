@@ -5,6 +5,8 @@
 // Usage:    range [start [end [step]]]
 //
 
+#include <cstdlib>
+
 #include <stdexcept>
 
 #include "input.h"
