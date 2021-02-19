@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 #include "input.h"
+#include "util.h"
 
 int main(int argc, char *argv[]) {
     int count = 10;
@@ -21,6 +22,7 @@ int main(int argc, char *argv[]) {
 
     for (int i = count; i >= 0; --i) {
         std::cout << i << std::endl;
+        if (i > 0) sleep_secs(1);
     }
 
     std::cout << "BOOM !!!" << std::endl;
