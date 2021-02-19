@@ -3,32 +3,45 @@ CXXFLAGS = -Wall
 LINT = cpplint
 LINTARGS = --root C++
 
-PROGRAMS = hello add range bomb sum dups
+PROGRAMS = hello add range bomb sum dups report
 
-LIBRARIES = libutil.a
+UTILLIBS = libutil.a
+BOOKLIBS = bookstore.a
 
-SOURCES = input.h input.cc util.h util.cc hello.cc range.cc bomb.cc sum.cc
+LIBRARIES = $(UTILLIBS) $(BOOKLIBS)
+
+SOURCES = input.h input.cc util.h util.cc \
+	sales_item.h sales_item.cc \
+	hello.cc range.cc bomb.cc sum.cc \
+	report.cc
 
 all: $(LIBRARIES) $(PROGRAMS)
 
 libutil.a: input.o util.o
 	$(AR) $(ARFLAGS) $@ $^
 
+bookstore.a: sales_item.o
+	$(AR) $(ARFLAGS) $@ $^
+
 input.o: input.h input.cc
 
 util.o: util.h util.cc
 
+sales_item.o: sales_item.h sales_item.cc
+
 hello: hello.cc
 
-add: add.cc $(LIBRARIES)
+add: add.cc $(UTILLIBS)
 
-range: range.cc $(LIBRARIES)
+range: range.cc $(UTILLIBS)
 
-bomb: bomb.cc $(LIBRARIES)
+bomb: bomb.cc $(UTILLIBS)
 
 sum: sum.cc
 
 dups: dups.cc
+
+report: report.cc $(BOOKLIBS)
 
 lint:
 	$(LINT) $(LINTARGS) $(SOURCES)

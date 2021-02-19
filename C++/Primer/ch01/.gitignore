@@ -4,4 +4,5 @@ range
 bomb
 sum
 dups
-libutil.a
+report
+*.a
