@@ -3,11 +3,11 @@ CXXFLAGS = -Wall
 LINT = cpplint
 LINTARGS = --root C++
 
-PROGRAMS = hello add
+PROGRAMS = hello add range
 
 LIBRARIES = libutil.a
 
-SOURCES = input.h input.cc hello.cc
+SOURCES = input.h input.cc hello.cc range.cc
 
 all: $(LIBRARIES) $(PROGRAMS)
 
@@ -19,6 +19,8 @@ input.o: input.h input.cc
 hello: hello.cc
 
 add: add.cc $(LIBRARIES)
+
+range: range.cc $(LIBRARIES)
 
 lint:
 	$(LINT) $(LINTARGS) $(SOURCES)
