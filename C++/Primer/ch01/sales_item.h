@@ -13,13 +13,17 @@ class SalesItem {
             unsigned int quantity = 0,
             double price = 0.0);
 
-  // Assignment:
+  // Copy and Assignment:
+  SalesItem(const SalesItem &from);
   SalesItem &operator=(const SalesItem &from);
 
   // Accessors:
   const std::string &isbn(void) const { return isbn_; }
   unsigned int quantity(void) const { return quantity_; }
   double revenue(void) const { return revenue_; }
+
+  // Adds two records with a common ISBN.
+  SalesItem &operator+=(const SalesItem &from);
 
   // Returns the average cost per book sold.
   double average(void) const;
