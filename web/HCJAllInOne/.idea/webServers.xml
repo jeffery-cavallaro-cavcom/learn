@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="383281fc-e82e-402b-902b-e36b76e5b280" name="01eec45.netsolhost.com" url="http://www.cavcom.com">
+        <fileTransfer rootFolder="/htdocs" accessType="SFTP" host="01eec45.netsolhost.com" port="22" sshConfigId="6f042952-0af8-46b1-9df3-ffc8dc0a4640" sshConfig="ftp%cavcom@01eec45.netsolhost.com:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
