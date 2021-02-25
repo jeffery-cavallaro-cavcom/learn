@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="01eec45.netsolhost.com" remoteFilesAllowedToDisappearOnAutoupload="false" />
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Local Apache2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/HCJAllInOne" local="$PROJECT_DIR$" web="/HCJAllInOne" />
+            <mapping local="" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
 </project>
