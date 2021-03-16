@@ -14,7 +14,7 @@ numbers = {
 key = None
 try:
     key = input('Digit? ').lower()
-except KeyboardInterrupt or EOFError:
+except (KeyboardInterrupt, EOFError):
     pass
 else:
     value = numbers.get(key, 'unknown')

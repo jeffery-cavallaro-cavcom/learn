@@ -33,7 +33,7 @@ while True:
     try:
         key = valuer(input("key: "))
         value = valuer(input("value: "))
-    except KeyboardInterrupt or EOFError:
+    except (KeyboardInterrupt, EOFError):
         break
     table[key] = value
     print(table)
