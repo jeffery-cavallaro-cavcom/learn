@@ -4,15 +4,24 @@
 
 disk|partition|size
 ---|---|---
-1|/boot/efi|200 Mb
-1|/|100 Gb
+1|/boot/efi|500 Mb
+1|/|500 Gb
 1|swap|10 Gb
-1|/usr|500 Gb
 1|/tmp|10 Gb
-1|/var|10 Gb
-1|/opt|100 Gb
-1|/srv|rest
-2|/home|whole
+1|/var|100 Gb
+2|/home|rest
+
+## Groups
+
+Change group to `users`:
+
+In file `/etc/group`, delete the user-specific group and add the user to the
+`user` group.  Then, change group ownership on all files in home:
+
+```bash
+# cd /home
+# chown -R jeffery.users jeffery
+```
 
 ## Accounts
 
@@ -149,6 +158,8 @@ Install Git and all of its associated GUIs and tools:
 
 ``` bash
 # apt-get install git
+# apt-get install gitk
+# apt-get install git-gui
 ```
 
 ### Global Configuration
@@ -158,7 +169,7 @@ The following commands will write global settings to `~/.gitconfig`:
 ``` bash
 $ git config --global user.name "Jeffery Cavallaro"
 $ git config --global user.email "jeffery@cavcom.com"
-$ git config --global core.editor "emacs"
+$ git config --global core.editor "/usr/bin/emacs"
 ```
 
 ## DNS
@@ -178,7 +189,7 @@ If not installed, install and enable ssh support:
 
 ``` bash
 # apt-get install ssh
-# apt-get enable ssh
+# systemctl enable ssh
 ```
 
 ## Virtualbox

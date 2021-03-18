@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ch03/cascade.html" beforeDir="false" afterPath="$PROJECT_DIR$/ch03/cascade.html" afterDir="false" />
-    </list>
+    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +65,7 @@
       <workItem from="1614224967359" duration="2379000" />
       <workItem from="1614746063345" duration="3250000" />
       <workItem from="1614909960847" duration="280000" />
-      <workItem from="1616038824774" duration="2334000" />
+      <workItem from="1616038824774" duration="2484000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>
