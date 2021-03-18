@@ -23,6 +23,14 @@ In file `/etc/group`, delete the user-specific group and add the user to the
 # chown -R jeffery.users jeffery
 ```
 
+## Sudoers
+
+Change the following line in `/etc/sudoers`:
+
+```
+%sudo	ALL=(ALL:ALL) NOPASSWD:ALL
+```
+
 ## Accounts
 
 On first login, connect to Ubuntu, Google, and Microsoft accounts.
@@ -190,6 +198,30 @@ If not installed, install and enable ssh support:
 ``` bash
 # apt-get install ssh
 # systemctl enable ssh
+```
+
+## Chrome
+
+The following procedure will add the distribution site to the apt sources list:
+
+``` bash
+$ cd ~/Downloads
+$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+$ sudo apt install ./google-chrome-stable_current_amd64.deb
+$ rm google-chrome-stable_current_amd64.deb
+```
+
+## Opera
+
+``` bash
+# snap install opera
+```
+
+## JetBrains
+
+``` bash
+# snap install pycharm-professional --classic
+# snap install webstorm --classic
 ```
 
 ## Virtualbox
