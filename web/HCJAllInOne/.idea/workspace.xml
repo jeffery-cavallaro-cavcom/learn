@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2" />
+    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,8 +39,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -66,6 +69,8 @@
       <workItem from="1614746063345" duration="3250000" />
       <workItem from="1614909960847" duration="280000" />
       <workItem from="1616038824774" duration="2484000" />
+      <workItem from="1616094222750" duration="24000" />
+      <workItem from="1616471667483" duration="2799000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>
