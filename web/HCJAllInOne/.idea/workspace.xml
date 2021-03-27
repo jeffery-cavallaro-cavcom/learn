@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2">
-      <change afterPath="$PROJECT_DIR$/ch04/modified.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +72,7 @@
       <workItem from="1616094222750" duration="24000" />
       <workItem from="1616471667483" duration="2799000" />
       <workItem from="1616695439803" duration="4551000" />
-      <workItem from="1616790920686" duration="3661000" />
+      <workItem from="1616790920686" duration="10626000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>
