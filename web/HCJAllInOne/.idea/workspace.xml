@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ch06/text.html" beforeDir="false" afterPath="$PROJECT_DIR$/ch06/text.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +29,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1ouJKlUNJzyR9DrdJXGVpzNue6Z" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -76,6 +77,7 @@
       <workItem from="1616790920686" duration="10745000" />
       <workItem from="1616820742669" duration="4874000" />
       <workItem from="1616993832894" duration="2228000" />
+      <workItem from="1616998666688" duration="9891000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>

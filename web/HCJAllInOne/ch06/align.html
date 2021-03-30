@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Cell Alignment</title>
+    <style>
+        table {
+            width: 5in;
+            border: 3px solid black;
+            border-collapse: collapse;
+        }
+        thead {
+            border: 2px solid black;
+            background-color: cyan;
+        }
+        tr, th, td {
+            border: 1px solid black;
+        }
+        th {
+            font-style: italic;
+         }
+        td:first-child {
+            text-align: center;
+            vertical-align: top;
+        }
+        td:nth-child(2) {
+            text-align: justify;
+        }
+        td.page {
+            background-color: yellow;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr><td colspan="3">DICTIONARY</tr>
+    <tr><th style="width: 30%">word</th><th>definition</th><th>page</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>walk</td>
+        <td>The act of putting one foot in front of the other in order to
+            move from one place to another.  A slow, uneven walk is sometimes
+            called a stagger.  A moderately fast walk is called a jog.  A
+            very fast walk is called a run.</td>
+        <td rowspan="2" class="page">42</td>
+    </tr>
+    <tr>
+        <td>talk</td>
+        <td>
+            The act of exhaling air from the lungs throw the vocal chords and
+            then through shaped lips in order to make sounds that result in
+            communication.
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Columns Example</title>
+    <style>
+        article {
+            column-count: 3;
+            column-gap: 5%;
+            column-rule: 1px solid blue;
+        }
+        header.banner {
+            column-span: all;
+            font-family: cursive;
+            font-size: 16pt;
+        }
+        header {
+            text-align: center;
+        }
+        section, header, h2, p {
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            font-style: italic;
+        }
+        p {
+            text-align: justify;
+        }
+        span.addr {
+            font-style: italic;
+        }
+        footer {
+            column-span: all;
+            font-style: oblique;
+            padding: 50px 0 0 0;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <header class="banner">
+        <h1>The Fremont Times</h1>
+    </header>
+    <section>
+        <header>
+            <h2>The Cavallaro Family</h2>
+        </header>
+        <p>
+            The Cavallaro family (Jeffery, Leila, April, Peter, and Jay),
+            located at <span class="addr">38712 Almaden Place</span>,
+            will be hosting Easter this year.  In attendance will be
+            Leila's parents, the Astarais, Leila's brother "Big Jay",
+            and perhaps Leila's cousin Janet.  Jeffery's parents live in
+            Southern California and won't be making the trip this year.
+            Of course, Ruca will be there looking for handouts.  Tommie
+            will also be there, but he will probably be hiding under the
+            bed.
+        </p>
+        <p>
+            Interested parties should call the Cavallaros on their home
+            number: 510-797-7712.  Please call on Friday between the
+            hours of 9am and 2pm if you would like to join the festivities.
+        </p>
+    </section>
+    <section>
+        <header>
+            <h2>Fry's is Fried</h2>
+        </header>
+        <p>
+            On a particularly sad note, the Fry's location in Fremont on the
+            corner of Osgood and Auto Mall Parkway is no more.  The company
+            announced earlier this week that they were filing for Chapter 7
+            backruptcy and thus would shutter all remaining store immediately.
+        </p>
+        <p>
+            Electronics hobbyists will miss this once great source of
+            components and test equipment.  They will also miss the aisles of
+            junk food approaching the registers.
+        </p>
+        <p>
+            First we lost Radio Shack, and now Fry's is gone as well.
+        </p>
+    </section>
+    <section>
+        <header>
+            <h2>Advertise With Us</h2>
+        </header>
+        <p>If you would like to reach the people of Fremont with your
+            message, call our advertisting department today!  We can be
+            reached at 510-697-7231, seven days a week, from 8am to 5pm.</p>
+    </section>
+    <footer>
+        March 29, 2021
+    </footer>
+</article>
+</body>
+</html>
