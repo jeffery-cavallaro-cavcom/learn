@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2">
-      <change beforePath="$PROJECT_DIR$/../../python/Crash/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../python/Crash/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +76,7 @@
       <workItem from="1616820742669" duration="4874000" />
       <workItem from="1616993832894" duration="2228000" />
       <workItem from="1616998666688" duration="9919000" />
-      <workItem from="1617205863781" duration="6072000" />
+      <workItem from="1617205863781" duration="6150000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>
