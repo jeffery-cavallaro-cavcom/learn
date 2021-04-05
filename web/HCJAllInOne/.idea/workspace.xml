@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2" />
+    <list default="true" id="6aff429c-486e-44cb-a8aa-cda6bb708000" name="Default Changelist" comment="Finish chapter 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +46,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ch08" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="hello.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/HCJAllInOne/ch02/hello.html" useBuiltInWebServerPort="true">
       <method v="2" />
@@ -77,6 +84,7 @@
       <workItem from="1616993832894" duration="2228000" />
       <workItem from="1616998666688" duration="9919000" />
       <workItem from="1617205863781" duration="6150000" />
+      <workItem from="1617387703258" duration="17913000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>
