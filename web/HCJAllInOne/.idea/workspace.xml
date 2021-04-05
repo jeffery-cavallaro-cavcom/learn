@@ -41,12 +41,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ch09" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ch09" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ch08" />
     </key>
@@ -85,6 +88,7 @@
       <workItem from="1616998666688" duration="9919000" />
       <workItem from="1617205863781" duration="6150000" />
       <workItem from="1617387703258" duration="17913000" />
+      <workItem from="1617650349707" duration="2574000" />
     </task>
     <task id="LOCAL-00001" summary="Work on chapter 2">
       <created>1614227177797</created>
