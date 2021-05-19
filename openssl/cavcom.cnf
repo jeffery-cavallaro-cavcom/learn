@@ -8,7 +8,7 @@ string_mask = utf8only
 distinguished_name = server_fqdn
 prompt = no
 
-x509_extensions = server_extensions
+req_extensions = server_extensions
 
 [ server_fqdn ]
 
@@ -24,7 +24,6 @@ emailAddress = jeffery@cavcom.com
 
 basicConstraints = critical,CA:false
 subjectKeyIdentifier = hash
-authorityKeyIdentifier = keyid:always, issuer:always
 keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
