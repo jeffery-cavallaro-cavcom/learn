@@ -240,3 +240,17 @@ contemplated.
 
 If EFI secure boot is enabled then the system will walk through the steps to
 install a new MOK.
+
+## Thunderbird
+
+|NAME|VALUE|
+|----|-----|
+|Username|jeffery@cavcom.com|
+|IMAP Server|mail.cavcom.com|
+|IMAP Port|993|
+|IMAP Connection Security|SSL/TLS|
+|IMAP Authentication Method|Normal Password|
+|SMTP Server|smtp.cavcom.com|
+|SMTP Port|587|
+|SMTP Connection Security|STARTTLS|
+|SMTP Authentication Method|Encrypted Password|
