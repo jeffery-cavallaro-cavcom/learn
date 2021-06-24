@@ -11,17 +11,13 @@ disk|partition|size
 1|/var|100 Gb
 2|/home|rest
 
+## Accounts
+
+On first login, connect to Ubuntu, Google, and Microsoft accounts.
+
 ## Groups
 
-Change group to `users`:
-
-In file `/etc/group`, delete the user-specific group and add the user to the
-`user` group.  Then, change group ownership on all files in home:
-
-```bash
-# cd /home
-# chown -R jeffery.users jeffery
-```
+Change the user-specific group to `users`.
 
 ## Sudoers
 
@@ -30,10 +26,6 @@ Change the following line in `/etc/sudoers`:
 ```
 %sudo	ALL=(ALL:ALL) NOPASSWD:ALL
 ```
-
-## Accounts
-
-On first login, connect to Ubuntu, Google, and Microsoft accounts.
 
 ## Firefox
 
@@ -53,63 +45,25 @@ The snap version (27) is built with an older fontconfig, resulting in warnings
 and errors on startup.  Use the apt-get version (26).
 
 ``` bash
-# apt-get update
-# apt-get install emacs
+apt-get update
+apt-get install emacs
 ```
 
 ### Configuration
 
-Set the following options from either the menu or by editing the `/.emacs
-file:
-
-```emacs-lisp
-(custom-set-variables
- '(default-frame-alist (quote ((width . 80) (height . 25))))
- '(fill-column 79)
- '(indent-tabs-mode nil)
- '(inhibit-startup-screen t))
-
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-(package-initialize)
-```
+Copy the file [`emacs.conf`](emacs.conf) to `~/.emacs`.
 
 ### Clean
 
-This is a shell script to clean up emacs turds:
-
-``` bash
-$ mdkir ~/bin
-$ echo 'find . \( -name \*~ -o -name .\*~ -o -name \#\* \) -exec rm \{\} \; -print' > ~/bin/clean
-$ chmod +x ~/bin/clean
-```
-
-Log out and back in for ~/bin to be in path.
+This is a shell script to clean up emacs turds.  Copy [`clean`](clean) to
+`~/bin`.
 
 ### Default
 
 Set emacs as the default editor by adding the following line to `~/.profile`:
 
 ``` bash
-export EDITOR=emacs
-```
-
-## Brasero
-
-This is the standard tool for cd/dvd rom write and copy operations:
-
-``` bash
-# apt-get install brasero
-```
-
-## Codecs
-
-Most of the needed codecs for A/V are in proprietary packages and must be
-installed separately:
-
-``` bash
-# apt-get install ubuntu-restricted-extras
+export EDITOR=/usr/bin/emacs
 ```
 
 ## Markdown
@@ -124,38 +78,27 @@ manually.
 
 ### Configuration
 
-To get the markdown viewer to work, create the file:
-`~/.local/share/mime/packages/text-markdown.xml`
-with the following content:
-
-``` xml
-<?xml version="1.0"?>
-<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
-  <mime-type type="text/plain">
-    <glob pattern="*.md"/>
-    <glob pattern="*.mkd"/>
-    <glob pattern="*.markdown"/>
-  </mime-type>
-</mime-info>
-```
+To get the markdown viewer to work, copy the file
+[`text-markdown.xml`](text-markdown.xml) to
+`~/.local/share/mime/packages/text-markdown.xml`.
 
 Then update the MIME database:
 
 ``` bash
-$ update-mime-database ~/.local/share/mime
+update-mime-database ~/.local/share/mime
 ```
 
 ### emacs
 
-Install (package-install) the `markdown-mode` package for emacs.  This will add
-two modes: `markdown-mode` for standard markdown and `gfm-mode` for
+Install (package-install) the `markdown-mode` package for emacs.  This will
+add two modes: `markdown-mode` for standard markdown and `gfm-mode` for
 git-flavored markdown.
 
 Add the following line to `~\.emacs` so that GFM mode is the default for
 `README.md` files:
 
 ``` emacs-lisp
-(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 ```
 
 ## Git
@@ -165,9 +108,9 @@ Add the following line to `~\.emacs` so that GFM mode is the default for
 Install Git and all of its associated GUIs and tools:
 
 ``` bash
-# apt-get install git
-# apt-get install gitk
-# apt-get install git-gui
+apt-get install git
+apt-get install gitk
+apt-get install git-gui
 ```
 
 ### Global Configuration
@@ -175,9 +118,45 @@ Install Git and all of its associated GUIs and tools:
 The following commands will write global settings to `~/.gitconfig`:
 
 ``` bash
-$ git config --global user.name "Jeffery Cavallaro"
-$ git config --global user.email "jeffery@cavcom.com"
-$ git config --global core.editor "/usr/bin/emacs"
+git config --global user.name "Jeffery Cavallaro"
+git config --global user.email "jeffery@cavcom.com"
+git config --global core.editor "/usr/bin/emacs"
+```
+
+## Brasero
+
+This is the standard tool for cd/dvd rom write and copy operations:
+
+``` bash
+apt-get install brasero
+```
+
+## Codecs
+
+Most of the needed codecs for A/V are in proprietary packages and must be
+installed separately:
+
+``` bash
+apt-get install ubuntu-restricted-extras
+```
+
+Accept all license agreements during the installation.
+
+## Development
+
+Install the compilers and debuggers:
+
+``` bash
+apt-get install build-essential
+```
+
+## ssh
+
+If not installed, install and enable ssh support:
+
+``` bash
+# apt-get install ssh
+# systemctl enable ssh
 ```
 
 ## DNS
@@ -189,15 +168,6 @@ the search domain, access the connection manager editor:
 
 ``` bash
 # nm-connection-editor
-```
-
-## ssh
-
-If not installed, install and enable ssh support:
-
-``` bash
-# apt-get install ssh
-# systemctl enable ssh
 ```
 
 ## Chrome
