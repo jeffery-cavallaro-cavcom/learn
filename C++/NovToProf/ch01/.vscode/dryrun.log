@@ -1,0 +1,5 @@
+make all --dry-run --keep-going --print-directory
+make: Entering directory '/home/jeffery/learn/C++/NovToProf/ch01'
+g++ -g -Wall -std=c++17    answer.cc   -o answer
+make: Leaving directory '/home/jeffery/learn/C++/NovToProf/ch01'
+ 

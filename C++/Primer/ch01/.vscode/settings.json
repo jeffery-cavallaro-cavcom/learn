@@ -1,0 +1,10 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/jeffery/learn/C++/Primer/ch01",
+            "binaryPath": "/home/jeffery/learn/C++/Primer/ch01/hello",
+            "binaryArgs": []
+        }
+    ]
+}
