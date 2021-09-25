@@ -1,50 +1,20 @@
 CXX = g++
-CXXFLAGS = -Wall
-LINT = cpplint
-LINTARGS = --root C++
+CC = g++
 
-PROGRAMS = hello add range bomb sum dups report
+CXXFLAGS = -g -Wall -std=c++17
 
-UTILLIBS = libutil.a
-BOOKLIBS = bookstore.a
+PROGRAMS = hello
 
-LIBRARIES = $(UTILLIBS) $(BOOKLIBS)
+OBJS = hello.o
 
-SOURCES = input.h input.cc util.h util.cc \
-	sales_item.h sales_item.cc \
-	hello.cc range.cc bomb.cc sum.cc \
-	report.cc
+SOURCES = hello.cc
 
-all: $(LIBRARIES) $(PROGRAMS)
+all: $(PROGRAMS)
 
-libutil.a: input.o util.o
-	$(AR) $(ARFLAGS) $@ $^
-
-bookstore.a: sales_item.o
-	$(AR) $(ARFLAGS) $@ $^
-
-input.o: input.h input.cc
-
-util.o: util.h util.cc
-
-sales_item.o: sales_item.h sales_item.cc
-
-hello: hello.cc
-
-add: add.cc $(UTILLIBS)
-
-range: range.cc $(UTILLIBS)
-
-bomb: bomb.cc $(UTILLIBS)
-
-sum: sum.cc
-
-dups: dups.cc
-
-report: report.cc $(BOOKLIBS)
+hello: hello.o
 
 lint:
-	$(LINT) $(LINTARGS) $(SOURCES)
+	@cpplint $(SOURCES)
 
 clean:
-	rm -rf *.o $(LIBRARIES) $(PROGRAMS)
+	@rm -f $(PROGRAMS) $(OBJS)

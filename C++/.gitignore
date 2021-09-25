@@ -1,7 +1,4 @@
 *
-!**/
-!.gitconfig
-!*.h
 !*.cc
-!*.cfg
-!*.txt
+!*.h
+!Makefile
