@@ -1,6 +1,6 @@
 make all --dry-run --keep-going --print-directory
 make: Entering directory '/home/jeffery/learn/C++/Primer/ch01'
-g++ -g -Wall -std=c++17   -c -o hello.o hello.cc
-g++   hello.o   -o hello
+g++ -g -Wall -std=c++17   -c -o add.o add.cc
+g++   add.o   -o add
 make: Leaving directory '/home/jeffery/learn/C++/Primer/ch01'
  

@@ -5,6 +5,11 @@
             "cwd": "/home/jeffery/learn/C++/Primer/ch01",
             "binaryPath": "/home/jeffery/learn/C++/Primer/ch01/hello",
             "binaryArgs": []
+        },
+        {
+            "cwd": "/home/jeffery/learn/C++/Primer/ch01",
+            "binaryPath": "/home/jeffery/learn/C++/Primer/ch01/add",
+            "binaryArgs": []
         }
     ]
 }

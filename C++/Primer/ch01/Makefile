@@ -3,15 +3,17 @@ CC = g++
 
 CXXFLAGS = -g -Wall -std=c++17
 
-PROGRAMS = hello
+PROGRAMS = hello add
 
-OBJS = hello.o
+OBJS = hello.o add.o
 
-SOURCES = hello.cc
+SOURCES = hello.cc add.cc
 
 all: $(PROGRAMS)
 
 hello: hello.o
+
+add: add.o
 
 lint:
 	@cpplint $(SOURCES)
