@@ -1,3 +1,5 @@
+// A simple hello world program for C++.
+
 #include <iostream>
 
 int main(int argc, char *argv[]) {

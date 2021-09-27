@@ -1,5 +1,4 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode",
     "makefile.launchConfigurations": [
         {
             "cwd": "/home/jeffery/learn/C++/Primer/ch01",
@@ -9,6 +8,11 @@
         {
             "cwd": "/home/jeffery/learn/C++/Primer/ch01",
             "binaryPath": "/home/jeffery/learn/C++/Primer/ch01/add",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/jeffery/learn/C++/Primer/ch01",
+            "binaryPath": "/home/jeffery/learn/C++/Primer/ch01/sum",
             "binaryArgs": []
         }
     ]
