@@ -1,13 +1,20 @@
-CXX = g++-9
-CC = g++-9
+-include ~/make/cpp.mak
 
-CXXFLAGS = -g -Wall -std=c++17
+SIMPLE_PROGRAMS = hello add sum bomb average counter
 
-PROGRAMS = hello add sum bomb average counter sales
+LIB_PROGRAMS = sales
+
+PROGRAMS = $(SIMPLE_PROGRAMS) $(LIB_PROGRAMS)
 
 LIBRARIES = libbookstore.a
 
-OBJS = hello.o add.o sum.o bomb.o average.o counter.o sales_item.o sales.o
+LDLIBDIRS = -L.
+
+LDLIBS = -lbookstore
+
+OBJS = sales_item.o sales.o
+
+INCLUDES = sales_item.h
 
 SOURCES =	hello.cc \
 			add.cc \
@@ -15,32 +22,37 @@ SOURCES =	hello.cc \
 			bomb.cc \
 			average.cc \
 			counter.cc \
-			sales_item.h \
 			sales_item.cc \
 			sales.cc
 
 all: $(LIBRARIES) $(PROGRAMS)
 
-hello: hello.o
+$(SIMPLE_PROGRAMS): %: %.cc
+	$(LINK.o) $(OUTPUT_OPTION) $<
 
-add: add.o
+libbookstore.a: sales_item.o
+	$(AR) $(ARFLAGS) $@ $?
 
-sum: sum.o
+sales_item.o: sales_item.h
 
-bomb: bomb.o
-
-average: average.o
-
-counter: counter.o
-
-libbookstore.a: sales_item.h sales_item.o
-	$(AR) $(ARFLAGS) libbookstore.a sales_item.o
-
-sales: sales.o libbookstore.a
-	$(CC) -o sales sales.o -L . -lbookstore
+sales: sales.o $(LDLIBS)
+	$(LINK.o) $(LDLIBDIRS) $(OUTPUT_OPTION) $+
 
 lint:
-	@cpplint $(SOURCES)
+	@$(LINT.cc) $(INCLUDES) $(SOURCES)
 
 clean:
-	@rm -f $(LIBRARIES) $(PROGRAMS) $(OBJS)
+	@${RM} -f $(LIBRARIES) $(PROGRAMS) $(OBJS)
+
+distclean: clean
+	@${RM} -f *.d
+
+help:
+	@${MAKE} --print-data-base --question all | \
+    grep -v -e '[Mm]akefile' -e '^[#.-]' | \
+    grep -e '^[-A-Za-z0-9_]*\(.a\)*:' | \
+    gawk '/.*:/ { print substr($$1,1,length($$1)-1) }' | \
+    sort | \
+	pr --omit-pagination --width=80 --columns=4
+
+-include $(subst .cc,.d,$(SOURCES))
