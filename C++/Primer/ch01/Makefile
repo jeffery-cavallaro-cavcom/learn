@@ -17,13 +17,13 @@ OBJS = sales_item.o sales.o
 INCLUDES = sales_item.h
 
 SOURCES =	hello.cc \
-			add.cc \
-			sum.cc \
-			bomb.cc \
-			average.cc \
-			counter.cc \
-			sales_item.cc \
-			sales.cc
+		add.cc \
+		sum.cc \
+		bomb.cc \
+		average.cc \
+		counter.cc \
+		sales_item.cc \
+		sales.cc
 
 all: $(LIBRARIES) $(PROGRAMS)
 
@@ -47,12 +47,4 @@ clean:
 distclean: clean
 	@${RM} -f *.d
 
-help:
-	@${MAKE} --print-data-base --question all | \
-    grep -v -e '[Mm]akefile' -e '^[#.-]' | \
-    grep -e '^[-A-Za-z0-9_]*\(.a\)*:' | \
-    gawk '/.*:/ { print substr($$1,1,length($$1)-1) }' | \
-    sort | \
-	pr --omit-pagination --width=80 --columns=4
-
--include $(subst .cc,.d,$(SOURCES))
+include $(TEMPLATES)/util.mak
