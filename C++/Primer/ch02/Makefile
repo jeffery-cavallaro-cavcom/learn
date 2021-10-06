@@ -1,6 +1,6 @@
 -include ~/make/cpp.mak
 
-SIMPLE_PROGRAMS = limits
+SIMPLE_PROGRAMS = limits convert
 
 PROGRAMS = $(SIMPLE_PROGRAMS)
 
