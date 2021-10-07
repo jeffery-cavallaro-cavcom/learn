@@ -1,10 +1,10 @@
 -include ~/make/cpp.mak
 
-SIMPLE_PROGRAMS = limits convert
+SIMPLE_PROGRAMS = limits convert literals
 
 PROGRAMS = $(SIMPLE_PROGRAMS)
 
-SOURCES =	limits.cc
+SOURCES =	limits.cc convert.cc literals.cc
 
 all: $(PROGRAMS)
 
