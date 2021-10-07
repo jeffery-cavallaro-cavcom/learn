@@ -33,8 +33,6 @@ $(SIMPLE_PROGRAMS): %: %.cc
 libbookstore.a: sales_item.o
 	$(AR) $(ARFLAGS) $@ $?
 
-sales_item.o: sales_item.h
-
 sales: sales.o $(LDLIBS)
 	$(LINK.o) $(LDLIBDIRS) $(OUTPUT_OPTION) $+
 
