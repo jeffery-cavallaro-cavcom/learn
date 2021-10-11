@@ -1,6 +1,6 @@
 -include ~/make/cpp.mak
 
-SIMPLE_PROGRAMS = limits convert literals initial scope ref
+SIMPLE_PROGRAMS = limits convert literals initial scope refpoint const alias
 
 PROGRAMS = $(SIMPLE_PROGRAMS) global
 
@@ -10,7 +10,10 @@ SOURCES = limits.cc \
           define.cc \
           literals.cc \
           initial.cc \
-          ref.cc
+          refpoint.cc \
+          scope.cc \
+          const.cc \
+          alias.cc
 
 OBJS = declare.o define.o
 
