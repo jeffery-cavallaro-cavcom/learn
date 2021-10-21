@@ -28,17 +28,11 @@ int main(int argc, char *argv[]) {
     int m = i1 < 0 ? -i1 : i1;
     int n = i2 < 0 ? -i2 : i2;
 
-    while (true) {
-        if (m < n) {
-            int itmp = m;
-            m = n;
-            n = itmp;
-        }
-        if (n == 0) break;
+    while (n != 0) {
         int d = m / n;
         int r = m % n;
         std::cout << m << "=" << d << "*" << n << "+" << r << std::endl;
-        m = d;
+        m = n;
         n = r;
     }
 
