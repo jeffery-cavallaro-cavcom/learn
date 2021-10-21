@@ -1,10 +1,10 @@
 -include ~/make/cpp.mak
 
-SIMPLE_PROGRAMS = answer
+SIMPLE_PROGRAMS = types euclid
 
 PROGRAMS = $(SIMPLE_PROGRAMS)
 
-SOURCES = answer.cc
+SOURCES = types.cc
 
 all: $(PROGRAMS)
 
