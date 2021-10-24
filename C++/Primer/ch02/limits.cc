@@ -7,8 +7,10 @@ void show_numeric(const std::string &name) {
     using type = std::numeric_limits<T>;
     std::cout << name << ":"
               << " size=" << sizeof(T)
+              << " bits=" << type::digits
               << " signed=" << type::is_signed
               << " integer=" << type::is_integer
+              << " lowest=" << type::lowest()
               << " min=" << type::min()
               << " max=" << type::max()
               << std::endl;
@@ -19,13 +21,16 @@ void show_character(const std::string &name) {
     using type = std::numeric_limits<T>;
     std::cout << name << ":"
               << " size=" << sizeof(T)
+              << " bits=" << type::digits
               << " signed=" << type::is_signed
               << " integer=" << type::is_integer;
     if (type::is_signed) {
-        std::cout << " min=" << static_cast<long>(type::min())
+        std::cout << " lowest=" << static_cast<long>(type::lowest())
+                  << " min=" << static_cast<long>(type::min())
                   << " max=" << static_cast<long>(type::max());
     } else {
-        std::cout << " min=" << static_cast<ulong>(type::min())
+        std::cout << " lowest=" << static_cast<ulong>(type::lowest())
+                  << " min=" << static_cast<ulong>(type::min())
                   << " max=" << static_cast<ulong>(type::max());
     }
     std::cout << std::endl;

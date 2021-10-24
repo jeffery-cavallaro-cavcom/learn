@@ -1,10 +1,26 @@
 -include ~/make/cpp.mak
 
-SIMPLE_PROGRAMS = types euclid
+SIMPLE_PROGRAMS = types \
+                  euclid \
+                  inches \
+                  infinity \
+                  format \
+                  yards \
+                  circle \
+                  tree \
+                  bmi
 
 PROGRAMS = $(SIMPLE_PROGRAMS)
 
-SOURCES = types.cc
+SOURCES = types.cc \
+          euclid.cc \
+          inches.cc \
+          infinity.cc \
+          format.cc \
+          yards.cc \
+          circle.cc \
+          tree.cc \
+          bmi.cc
 
 all: $(PROGRAMS)
 

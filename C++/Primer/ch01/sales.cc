@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
         if (!result.second) result.first->second += book;
     }
 
-    for (const auto book : books) {
+    for (const auto &book : books) {
         std::cout << book.second << std::endl;
     }
 
