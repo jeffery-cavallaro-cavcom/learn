@@ -1,10 +1,10 @@
 -include ~/make/cpp.mak
 
-SIMPLE_PROGRAMS = bits
+SIMPLE_PROGRAMS = bits enums
 
 PROGRAMS = $(SIMPLE_PROGRAMS)
 
-SOURCES = bits.cc
+SOURCES = bits.cc enums.cc
 
 all: $(PROGRAMS)
 
