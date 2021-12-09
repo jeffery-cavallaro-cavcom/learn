@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<cats>
+    <cat name="Max" color="black" />
+    <cat name="Tommie" color="gray and white" />
+</cats>
