@@ -1,4 +1,4 @@
-package ch01;
+package ch02;
 
 /**
  * Performs a countdown from 10.
