@@ -1,4 +1,4 @@
-package ch01;
+package ch02;
 
 /**
  * A simple Hello, World program.
