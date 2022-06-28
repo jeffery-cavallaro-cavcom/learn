@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SshConfigs">
-    <configs>
-      <sshConfig authType="PASSWORD" host="01eec45.netsolhost.com" id="6f042952-0af8-46b1-9df3-ffc8dc0a4640" port="22" nameFormat="DESCRIPTIVE" username="ftp%cavcom" />
-    </configs>
-  </component>
-</project>

@@ -1,9 +1,0 @@
-#!/bin/bash
-
-for i in `find . -name Makefile -print`; do
-    cd $(dirname $i)
-    pwd
-    make distclean
-    make all
-    cd -
-done
