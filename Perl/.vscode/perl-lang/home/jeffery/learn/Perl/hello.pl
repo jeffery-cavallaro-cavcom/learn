@@ -1,1 +1,0 @@
-{"vars":[{"containerName":null,"localvar":"my","kind":13,"line":0,"name":"$msg","definition":"my"},{"containerName":null,"name":"$msg","line":2,"kind":13}],"version":5}
