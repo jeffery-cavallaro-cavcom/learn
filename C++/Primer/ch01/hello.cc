@@ -1,3 +1,7 @@
+/**
+ * A simple hello world program.
+**/
+
 #include <iostream>
 #include <string>
 
