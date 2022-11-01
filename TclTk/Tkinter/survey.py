@@ -1,3 +1,8 @@
+"""
+This interactive application is a banana survey that demonstrates the use of
+the various plain Tk widgets.
+"""
+
 import tkinter as tk
 
 root = tk.Tk()
