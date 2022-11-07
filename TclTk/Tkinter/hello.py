@@ -1,3 +1,5 @@
+""" A hello world form """
+
 import tkinter as tk
 
 root = tk.Tk()

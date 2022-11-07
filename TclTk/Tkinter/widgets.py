@@ -4,16 +4,16 @@ This interactive application demonstrates the use of the basic Ttk widgets.
 
 import tkinter as tk
 from tkinter import ttk
-from turtle import bgcolor
 
 root = tk.Tk()
 root.title('widgets')
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=1)
 
+# pylint: disable=invalid-name
 row = 0
-sides = tk.W + tk.E
-all = sides + tk.N + tk.S
+SIDES = tk.W + tk.E
+ALL = SIDES + tk.N + tk.S
 
 ttk.Label(
     root,
@@ -21,19 +21,19 @@ ttk.Label(
     background='green',
     foreground='yellow',
     anchor=tk.CENTER,
-).grid(row=row, column=0, columnspan=2, sticky=sides, ipady=5)
+).grid(row=row, column=0, columnspan=2, sticky=SIDES, ipady=5)
 
 row += 1
 
 ttk.Label(root, text='Entry:', anchor=tk.CENTER).grid(
-    row=row, column=0, sticky=sides, pady=5
+    row=row, column=0, sticky=SIDES, pady=5
 )
-ttk.Entry(root).grid(row=row, column=1, sticky=sides, padx=10, pady=10)
+ttk.Entry(root).grid(row=row, column=1, sticky=SIDES, padx=10, pady=10)
 
 row += 1
 
 ttk.Label(root, text='Count:', anchor=tk.CENTER).grid(
-    row=row, column=0, sticky=sides, pady=5
+    row=row, column=0, sticky=SIDES, pady=5
 )
 counter = tk.IntVar(value=0)
 ttk.Spinbox(
@@ -42,19 +42,19 @@ ttk.Spinbox(
     to=100,
     increment=10,
     textvariable=counter
-).grid(row=row, column=1, sticky=sides, padx=10)
+).grid(row=row, column=1, sticky=SIDES, padx=10)
 
 row += 1
 
 ttk.Label(root, text='Direction:', anchor=tk.CENTER).grid(
-    row=row, column=0, sticky=sides, pady=5
+    row=row, column=0, sticky=SIDES, pady=5
 )
 compass = tk.StringVar(value='North')
 ttk.Spinbox(
     root,
     textvariable=compass,
     values=['North', 'South', 'East', 'West']
-).grid(row=row, column=1, sticky=sides, padx=10)
+).grid(row=row, column=1, sticky=SIDES, padx=10)
 
 row += 1
 
@@ -62,6 +62,7 @@ checker = tk.BooleanVar(value=False)
 check_label = tk.StringVar(value='off')
 
 def toggle():
+    """ Change on/off label """
     value = checker.get()
     checker.set(value=value)
     check_label.set('on' if value else 'off')
@@ -82,12 +83,12 @@ for iletter in range(ord('A'), ord('D')):
     ttk.Radiobutton(
         frame, text=tletter, variable=letter, value=tletter
     ).pack()
-frame.grid(row=row, column=0, columnspan=2, padx=10, pady=5, sticky=sides)
+frame.grid(row=row, column=0, columnspan=2, padx=10, pady=5, sticky=SIDES)
 
 row += 1
 
 ttk.Label(root, text='Choice:', anchor=tk.CENTER).grid(
-    row=row, column=0, sticky=sides
+    row=row, column=0, sticky=SIDES
 )
 choice = tk.StringVar(value='Jeffery')
 ttk.Combobox(
@@ -106,7 +107,7 @@ ttk.Combobox(
 row += 1
 
 ttk.Label(root, text='Comment', anchor=tk.CENTER).grid(
-    row=row, column=0, columnspan=2, sticky=sides, pady=10
+    row=row, column=0, columnspan=2, sticky=SIDES, pady=10
 )
 row += 1
 tk.Text(
@@ -114,7 +115,7 @@ tk.Text(
     undo=True,
     maxundo=10,
     wrap=tk.CHAR
-).grid(row=row, column=0, columnspan=2, sticky=all, padx=10, pady=10)
+).grid(row=row, column=0, columnspan=2, sticky=ALL, padx=10, pady=10)
 
 row += 1
 

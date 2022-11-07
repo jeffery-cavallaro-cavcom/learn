@@ -10,58 +10,70 @@ from tkinter import ttk
 from datetime import datetime
 from pathlib import Path
 import csv
+import sys
 
 EQUIPMENT_FAULT = 'Equipment Fault'
 HUMIDITY = "Humidity (g/m\u00B3)"
 LIGHT = 'Light (klx)'
+# pylint: disable=consider-using-f-string
 TEMPERATURE = "Temperature ({}C)".format('\u00B0')
 NOTES = 'Notes'
 
-sides = tk.W + tk.E
+SIDES = tk.W + tk.E
 
 # All of the form widget control variables.
-variables = dict()
+variables = {}
 
 # Number of records saved for this iteration of the application.
+# pylint: disable=invalid-name
 records_saved = 0
 
-def data_section(outer, title):
-    frame = ttk.LabelFrame(outer, text=title)
-    frame.grid(sticky=sides)
+def data_section(parent, title):
+    """ Create a labeled box """
+    frame = ttk.LabelFrame(parent, text=title)
+    frame.grid(sticky=SIDES)
     for icol in range(3):
         frame.columnconfigure(icol, weight=1)
     return frame
 
-def form_entry(outer, row, column, name, type=tk.StringVar):
-    variables[name] = type()
-    ttk.Label(outer, text=name).grid(row=row, column=column)
-    ttk.Entry(outer, textvariable=variables[name]).grid(
-        row=(row + 1), column=column, sticky=sides
+def form_entry(parent, row, column, name, datatype=tk.StringVar):
+    """ Create a form entry widget with a label """
+    variables[name] = datatype()
+    ttk.Label(parent, text=name).grid(row=row, column=column)
+    ttk.Entry(parent, textvariable=variables[name]).grid(
+        row=(row + 1), column=column, sticky=SIDES
     )
 
-def form_combo(outer, row, column, values, name, type=tk.StringVar):
-    variables[name] = type()
-    ttk.Label(outer, text=name).grid(row=row, column=column)
-    ttk.Combobox(outer, textvariable=variables[name], values=values).grid(
-        row=(row + 1), column=column, sticky=sides
+# pylint: disable=too-many-arguments
+def form_combo(parent, row, column, values, name, datatype=tk.StringVar):
+    """ Create a combo box with a label """
+    variables[name] = datatype()
+    ttk.Label(parent, text=name).grid(row=row, column=column)
+    ttk.Combobox(parent, textvariable=variables[name], values=values).grid(
+        row=(row + 1), column=column, sticky=SIDES
     )
 
-def form_spinner(outer, row, column, from_, to, inc, name, type=tk.DoubleVar):
-    variables[name] = type()
-    ttk.Label(outer, text=name).grid(row=row, column=column)
+# pylint: disable=too-many-arguments
+def form_spinner(
+    parent, row, column, from_, to_, inc, name, datatype=tk.DoubleVar
+):
+    """ Create a spinner with a label """
+    variables[name] = datatype()
+    ttk.Label(parent, text=name).grid(row=row, column=column)
     ttk.Spinbox(
-        outer,
+        parent,
         textvariable=variables[name],
         from_=from_,
-        to=to,
+        to=to_,
         increment=inc
-    ).grid(row=(row + 1), column=column, sticky=sides)
+    ).grid(row=(row + 1), column=column, sticky=SIDES)
 
-def make_rec_info(outer):
-    rec_info = data_section(outer, 'Record Information')
+def make_rec_info(parent):
+    """ Create record information form """
+    rec_info = data_section(parent, 'Record Information')
 
     form_entry(rec_info, 0, 0, 'Date')
-    
+
     times = ['8:00', '12:00', '16:00', '20:00']
     form_combo(rec_info, 0, 1, times, 'Time')
 
@@ -74,15 +86,16 @@ def make_rec_info(outer):
         ttk.Radiobutton(
             lab_frame, value=lab, text=lab, variable=variables['Lab']
         ).pack(side=tk.LEFT, expand=True)
-    lab_frame.grid(row=3, column=0, sticky=sides)
+    lab_frame.grid(row=3, column=0, sticky=SIDES)
 
     plots = list(range(1, 21))
     form_combo(rec_info, 2, 1, plots, 'Plot')
 
     form_entry(rec_info, 2, 2, 'Seed Sample')
 
-def make_env_info(outer):
-    env_info = data_section(outer, 'Environment Data')
+def make_env_info(parent):
+    """ Make environment data form """
+    env_info = data_section(parent, 'Environment Data')
 
     form_spinner(env_info, 0, 0, 0.5, 52.0, 0.01, HUMIDITY)
     form_spinner(env_info, 0, 1, 0.0, 100.0, 0.01, LIGHT)
@@ -94,18 +107,20 @@ def make_env_info(outer):
         row=2, column=0, sticky=tk.W, pady=5
     )
 
-def make_plant_info(outer):
-    plant_info = data_section(outer, 'Plant Data')
+def make_plant_info(parent):
+    """ Make plant infor form """
+    plant_info = data_section(parent, 'Plant Data')
 
-    form_spinner(plant_info, 0, 0, 0, 20, 1, 'Plants', type=tk.IntVar)
-    form_spinner(plant_info, 0, 1, 0, 1000, 1, 'Blossoms', type=tk.IntVar)
-    form_spinner(plant_info, 0, 2, 0, 1000, 1, 'Fruit', type=tk.IntVar)
+    form_spinner(plant_info, 0, 0, 0, 20, 1, 'Plants', datatype=tk.IntVar)
+    form_spinner(plant_info, 0, 1, 0, 1000, 1, 'Blossoms', datatype=tk.IntVar)
+    form_spinner(plant_info, 0, 2, 0, 1000, 1, 'Fruit', datatype=tk.IntVar)
 
     form_spinner(plant_info, 2, 0, 0.0, 1000.0, 0.01, 'Min Height (cm)')
     form_spinner(plant_info, 2, 1, 0.0, 1000.0, 0.01, 'Max Height (cm)')
     form_spinner(plant_info, 2, 2, 0.0, 1000.0, 0.01, 'Median Height (cm)')
 
 def on_reset():
+    """ Reset all form fields """
     for variable in variables.values():
         if isinstance(variable, tk.BooleanVar):
             variable.set(False)
@@ -114,13 +129,15 @@ def on_reset():
     notes_input.delete('1.0', tk.END)
 
 def on_save():
+    """ Save form values """
+    # pylint: disable=global-statement
     global records_saved
 
     stamp = datetime.today().strftime('%Y-%m-%d')
     filename = Path(f"data_record_{stamp}.csv")
     is_new = not filename.exists()
 
-    data = dict()
+    data = {}
     fault = variables[EQUIPMENT_FAULT].get()
     for name, value in variables.items():
         if fault and name in (HUMIDITY, LIGHT, TEMPERATURE):
@@ -136,7 +153,9 @@ def on_save():
                 return
     data[NOTES] = notes_input.get('1.0', tk.END)
 
-    with open(filename, 'a', newline='') as out:
+    with open(
+        filename, 'a', newline='', encoding=sys.getdefaultencoding()
+    ) as out:
         writer = csv.DictWriter(out, fieldnames=data.keys())
         if is_new:
             writer.writeheader()
@@ -148,9 +167,10 @@ def on_save():
 
     on_reset()
 
-def make_buttons(outer):
-    frame = ttk.Frame(outer)
-    frame.grid(sticky=sides)
+def make_buttons(parent):
+    """ Make button frame """
+    frame = ttk.Frame(parent)
+    frame.grid(sticky=SIDES)
     ttk.Button(frame, text='Quit', command=root.quit).pack(side=tk.RIGHT)
     ttk.Button(frame, text='Save', command=on_save).pack(side=tk.RIGHT)
     ttk.Button(frame, text='Reset', command=on_reset).pack(side=tk.RIGHT)
@@ -162,7 +182,7 @@ root.columnconfigure(0, weight=1)
 ttk.Label(root, text='Lab Data Entry', font=('TkDefaultFont', 16)).grid()
 
 outer = ttk.Frame(root)
-outer.grid(padx=10, sticky=sides)
+outer.grid(padx=10, sticky=SIDES)
 outer.columnconfigure(0, weight=1)
 
 make_rec_info(outer)
@@ -171,13 +191,13 @@ make_plant_info(outer)
 
 ttk.Label(outer, text='Notes').grid()
 notes_input = tk.Text(outer, width=75, height=10)
-notes_input.grid(sticky=sides)
+notes_input.grid(sticky=SIDES)
 
 make_buttons(outer)
 
 status_value = tk.StringVar()
 status = ttk.Label(root, textvariable=status_value)
-status.grid(sticky=sides, padx=10)
+status.grid(sticky=SIDES, padx=10)
 
 on_reset()
 tk.mainloop()

@@ -9,6 +9,7 @@ root = tk.Tk()
 root.title('Going Bananas')
 root.resizable(False, False)
 
+# pylint: disable=invalid-name
 row = 0
 
 tk.Label(
@@ -74,6 +75,7 @@ comments_input.grid(row=row, column=0, columnspan=2)
 row += 1
 
 def on_submit():
+    """ Save survey results """
     message = f"Thanks for taking the survey, {name_value.get()}.\n"
     valid = True
     results.configure(fg='black')
@@ -99,7 +101,7 @@ def on_submit():
     comments = comments_input.get('1.0', tk.END)
     results_value.set(value=message)
     print(comments)
- 
+
 submit_button = tk.Button(root, text='SUBMIT', command=on_submit)
 exit_button = tk.Button(root, text='QUIT', command=root.quit)
 submit_button.grid(row=row, column=0, pady=10)
