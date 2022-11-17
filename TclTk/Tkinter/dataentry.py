@@ -12,6 +12,8 @@ from pathlib import Path
 import csv
 import sys
 
+from text_with_var import TextWithVar
+
 EQUIPMENT_FAULT = 'Equipment Fault'
 HUMIDITY = "Humidity (g/m\u00B3)"
 LIGHT = 'Light (klx)'
@@ -126,7 +128,7 @@ def on_reset():
             variable.set(False)
         else:
             variable.set('')
-    notes_input.delete('1.0', tk.END)
+    notes_input.value.set('')
 
 def on_save():
     """ Save form values """
@@ -151,7 +153,7 @@ def on_save():
                     f"Error in field: {name}. Data was not saved!"
                 )
                 return
-    data[NOTES] = notes_input.get('1.0', tk.END)
+    data[NOTES] = notes_input.value.get()
 
     with open(
         filename, 'a', newline='', encoding=sys.getdefaultencoding()
@@ -190,7 +192,7 @@ make_env_info(outer)
 make_plant_info(outer)
 
 ttk.Label(outer, text='Notes').grid()
-notes_input = tk.Text(outer, width=75, height=10)
+notes_input = TextWithVar(outer, width=75, height=10)
 notes_input.grid(sticky=SIDES)
 
 make_buttons(outer)
