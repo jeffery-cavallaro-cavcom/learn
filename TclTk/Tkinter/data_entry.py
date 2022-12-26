@@ -26,7 +26,7 @@ class LabeledFrame(ttk.LabelFrame):
 
 class RecordInfo(LabeledFrame):
     """ Record Information Box """
-    def __init__(self, parent, variables):
+    def __init__(self, parent, variables, error_var=None):
         """ Create the record information box """
         super().__init__(parent, 'Record Information')
 
@@ -269,10 +269,10 @@ class Application(tk.Tk):
             self, text='Lab Data Entry', font=('TkDefaultFont', 16)
         ).grid(row=0)
 
+        self.status_value = tk.StringVar()
         self.record_form = DataRecordForm(self)
         self.record_form.grid(row=1, padx=10, sticky=tk.W + tk.E)
 
-        self.status_value = tk.StringVar()
         self.status = ttk.Label(self, textvariable=self.status_value)
         self.status.grid(row=2, padx=10, sticky=tk.W + tk.E)
 
