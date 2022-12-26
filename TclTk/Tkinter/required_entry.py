@@ -7,9 +7,13 @@ from tkinter import ttk
 
 from validator import Validator
 
+# pylint: disable=too-many-ancestors
+
 class RequiredEntry(Validator, ttk.Entry):
     """ Required Entry """
-    def validate_focusout(self, event):
+    # pylint: disable=arguments-differ
+
+    def validate_focusout(self, **kwargs):
         """ Strip and check for a non-blank value """
         value = self.get()
         value = value.strip() if value else ''
@@ -19,7 +23,7 @@ class RequiredEntry(Validator, ttk.Entry):
         if value:
             valid = True
         else:
-            self.error_var.set('A value is required')
+            self.error_var.set('A non-blank value is required')
             valid = False
 
         return valid

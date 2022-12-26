@@ -2,6 +2,8 @@
 
 import tkinter as tk
 
+# pylint: disable=too-many-ancestors
+
 class TextWithVar(tk.Text):
     """ Text with Variable """
     def __init__(self, parent, textvariable, *args, **kwargs):

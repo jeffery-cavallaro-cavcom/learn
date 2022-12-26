@@ -4,6 +4,8 @@ Mixin for data entry validation
 
 import tkinter as tk
 
+# pylint: disable=no-member
+
 class Validator:
     """ Validating Mixin """
     ARGS = ('%P', '%s', '%S', '%V', '%i', '%d')
@@ -22,6 +24,7 @@ class Validator:
         """ Set error state """
         self.configure(foreground='red' if state else 'black')
 
+    # pylint: disable=too-many-arguments
     def validate(self, proposed, current, char, event, index, action):
         """ Validate event """
         self.error_var.set('')
@@ -45,6 +48,9 @@ class Validator:
             )
 
         return valid
+
+    # pylint: disable=unused-argument
+    # pylint: disable=no-self-use
 
     def validate_focusout(self, **kwargs):
         """ Validate focus-out event """
@@ -74,7 +80,6 @@ class Validator:
 
     def invalid_key(self, **kwargs):
         """ Handle invalid keystroke """
-        pass
 
     def trigger_validate_focusout(self):
         """ Simulate focusout validation """

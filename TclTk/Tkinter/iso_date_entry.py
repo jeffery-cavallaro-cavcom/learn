@@ -8,9 +8,13 @@ from datetime import datetime
 
 from validator import Validator
 
+# pylint: disable=too-many-ancestors
+
 class ISODateEntry(Validator, ttk.Entry):
     """ A Date Field """
     FORMAT = '%Y-%m-%d'
+
+    # pylint: disable=arguments-differ
 
     def validate_key(self, action, index, char, **kwargs):
         """ Validate current keystroke """
@@ -27,7 +31,7 @@ class ISODateEntry(Validator, ttk.Entry):
 
         return valid
 
-    def validate_focusout(self, event):
+    def validate_focusout(self, **kwargs):
         valid = True
 
         value = self.get()
@@ -40,7 +44,7 @@ class ISODateEntry(Validator, ttk.Entry):
                 self.error_var.set('Invalid date')
                 valid = False
         else:
-            self.error_var.set('A value is required')
+            self.error_var.set('A date value is required')
             valid = False
 
         return valid

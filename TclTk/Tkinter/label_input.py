@@ -6,14 +6,15 @@ from tkinter import ttk
 class LabelInput(tk.Frame):
     """ Label plus Input Widget """
     def __init__(
-            self,
-            parent,
-            label,
-            textvariable,
-            input_class=ttk.Entry,
-            input_args=None,
-            label_args=None,
-            **kwargs
+        # pylint: disable=too-many-arguments
+        self,
+        parent,
+        label,
+        textvariable,
+        input_class=ttk.Entry,
+        input_args=None,
+        label_args=None,
+        **kwargs
     ):
         """ Construct a new label with input widget """
         super().__init__(parent, **kwargs)
@@ -34,9 +35,9 @@ class LabelInput(tk.Frame):
 
         if input_class == ttk.Radiobutton:
             self.input = tk.Frame(self)
-            for v in input_args.pop('values', []):
+            for value in input_args.pop('values', []):
                 button = ttk.Radiobutton(
-                    self.input, value=v, text=v, **input_args
+                    self.input, value=value, text=value, **input_args
                 )
                 button.pack(
                     side=tk.LEFT, ipadx=10, ipady=2, expand=True, fill=tk.X

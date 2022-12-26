@@ -15,6 +15,8 @@ import sys
 from text_with_var import TextWithVar
 from label_input import LabelInput
 
+# pylint: disable=too-many-ancestors
+
 class LabeledFrame(ttk.LabelFrame):
     """ Frame with Label and Border """
     def __init__(self, parent, label, columns=3):
@@ -26,7 +28,7 @@ class LabeledFrame(ttk.LabelFrame):
 
 class RecordInfo(LabeledFrame):
     """ Record Information Box """
-    def __init__(self, parent, variables, error_var=None):
+    def __init__(self, parent, variables):
         """ Create the record information box """
         super().__init__(parent, 'Record Information')
 

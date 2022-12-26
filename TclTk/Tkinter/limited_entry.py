@@ -5,6 +5,8 @@ An entry that limits the number of allowed characters.
 import tkinter as tk
 from tkinter import ttk
 
+# pylint: disable=too-many-ancestors
+
 class LimitedEntry(tk.Entry):
     """ Limited Entry """
     def __init__(
@@ -37,9 +39,9 @@ class LimitedEntry(tk.Entry):
 
 if __name__ == '__main__':
     root = tk.Tk()
-    error_var = tk.StringVar()
-    entry = LimitedEntry(root, max_chars=5, error_var=error_var)
-    error_label = ttk.Label(root, textvariable=error_var, foreground='red')
+    error = tk.StringVar()
+    entry = LimitedEntry(root, max_chars=5, error_var=error)
+    error_label = ttk.Label(root, textvariable=error, foreground='red')
     entry.grid(sticky=tk.W+tk.E, padx=10, pady=10)
     error_label.grid(sticky=tk.W+tk.E, padx=10, pady=10)
     root.columnconfigure(0, weight=1)
