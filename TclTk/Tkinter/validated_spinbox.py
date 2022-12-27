@@ -5,6 +5,7 @@ A spin box with the following validations:
        allowed value is negative.
     3. Decimal point allowed only once and only when precision is less than 1.
     4. Final value in range and correct precision.
+    5. Updatable minimum and maximum values.
 """
 
 from decimal import Decimal, InvalidOperation
@@ -18,11 +19,34 @@ from validator import Validator
 class ValidatedSpinbox(Validator, ttk.Spinbox):
     """ A Validated Spinbox """
     def __init__(
-        self, *args, from_value='-Infinity', to_value='Infinity', **kwargs
+        self,
+        *args,
+        min_var=None,
+        max_var=None,
+        update_var=None,
+        from_value='-Infinity',
+        to_value='Infinity',
+        **kwargs
     ):
         super().__init__(*args, from_=from_value, to=to_value, **kwargs)
         increment = Decimal(str(kwargs.get('increment', '1.0')))
         self.precision = increment.normalize().as_tuple().exponent
+
+        self.variable = kwargs.get('textvariable')
+        if not self.variable:
+            self.variable = tk.DoubleVar()
+            self.configure(textvariable=self.variable)
+
+        if min_var:
+            self.min_var = min_var
+            self.min_var.trace_add('write', self.set_minimum)
+
+        if max_var:
+            self.max_var = max_var
+            self.max_var.trace_add('write', self.set_maximum)
+
+        self.update_var = update_var
+        self.bind('<FocusOut>', self.on_focusout)
 
     # pylint: disable=arguments-differ
     # pylint: disable=too-many-arguments
@@ -85,6 +109,43 @@ class ValidatedSpinbox(Validator, ttk.Spinbox):
             return False
 
         return True
+
+    def on_focusout(self, *_):
+        value = self.get()
+        if self.update_var and not self.error_var.get():
+            self.update_var.set(value)
+
+    def set_minimum(self, *_):
+        current = self.get()
+
+        try:
+            new_min = self.min_var.get()
+            self.config(from_=new_min)
+        except (tk.TclError, ValueError):
+            pass
+
+        if current:
+            self.variable.set(current)
+        else:
+            self.delete(0, tk.END)
+
+        self.trigger_validate_focusout()
+
+    def set_maximum(self, *_):
+        current = self.get()
+
+        try:
+            new_max = self.max_var.get()
+            self.config(to=new_max)
+        except (tk.TclError, ValueError):
+            pass
+
+        if current:
+            self.variable.set(current)
+        else:
+            self.delete(0, tk.END)
+
+        self.trigger_validate_focusout()
 
 if __name__ == '__main__':
     root = tk.Tk()

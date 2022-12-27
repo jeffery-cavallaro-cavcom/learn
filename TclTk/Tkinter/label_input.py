@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+from validated_radio_group import ValidatedRadioGroup
+
 class LabelInput(tk.Frame):
     """ Label plus Input Widget """
     def __init__(
@@ -14,6 +16,7 @@ class LabelInput(tk.Frame):
         input_class=ttk.Entry,
         input_args=None,
         label_args=None,
+        disable_var=None,
         **kwargs
     ):
         """ Construct a new label with input widget """
@@ -28,7 +31,12 @@ class LabelInput(tk.Frame):
             self.label = ttk.Label(self, text=label, **label_args)
             self.label.grid(row=0, column=0, sticky=tk.W + tk.E)
 
-        if input_class in (ttk.Checkbutton, ttk.Button, ttk.Radiobutton):
+        if input_class in (
+            ttk.Checkbutton,
+            ttk.Button,
+            ttk.Radiobutton,
+            ValidatedRadioGroup
+        ):
             input_args["variable"] = self.value
         else:
             input_args["textvariable"] = self.value
@@ -47,6 +55,18 @@ class LabelInput(tk.Frame):
 
         self.input.grid(row=1, column=0, sticky=tk.W + tk.E)
         self.columnconfigure(0, weight=1)
+
+        self.disable_var = disable_var
+        if self.disable_var:
+            self.disable_var.trace_add('write', self.on_disabled)
+
+    def on_disabled(self, *_):
+        if self.disable_var:
+            if self.disable_var.get():
+                self.input.configure(state=tk.DISABLED)
+                self.value.set('')
+            else:
+                self.input.configure(state=tk.NORMAL)
 
     def grid(self, sticky=(tk.W + tk.E), **kwargs):
         """ Add default sticky argument to grid """

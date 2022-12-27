@@ -12,8 +12,13 @@ from pathlib import Path
 import csv
 import sys
 
-from text_with_var import TextWithVar
+from iso_date_entry import ISODateEntry
 from label_input import LabelInput
+from required_entry import RequiredEntry
+from text_with_var import TextWithVar
+from validated_combobox import ValidatedCombobox
+from validated_radio_group import ValidatedRadioGroup
+from validated_spinbox import ValidatedSpinbox
 
 # pylint: disable=too-many-ancestors
 
@@ -32,26 +37,31 @@ class RecordInfo(LabeledFrame):
         """ Create the record information box """
         super().__init__(parent, 'Record Information')
 
-        LabelInput(self, 'Date', variables['Date']).grid(row=0, column=0)
+        LabelInput(
+            self, 'Date', variables['Date'], input_class=ISODateEntry
+        ).grid(row=0, column=0)
 
         LabelInput(
             self,
             'Time',
             variables['Time'],
-            input_class=ttk.Combobox,
+            input_class=ValidatedCombobox,
             input_args={'values': ['8:00', '12:00', '16:00', '20:00']}
         ).grid(row=0, column=1)
 
 
         LabelInput(
-            self, 'Technician', variables['Technician']
+            self,
+            'Technician',
+            variables['Technician'],
+            input_class=RequiredEntry
         ).grid(row=0, column=2)
 
         LabelInput(
             self,
             'Lab',
             variables['Lab'],
-            input_class=ttk.Radiobutton,
+            input_class=ValidatedRadioGroup,
             input_args={'values': ['A', 'B', 'C']}
         ).grid(row=1, column=0)
 
@@ -59,12 +69,15 @@ class RecordInfo(LabeledFrame):
             self,
             'Plot',
             variables['Plot'],
-            input_class=ttk.Combobox,
+            input_class=ValidatedCombobox,
             input_args={'values': list(range(1, 21))}
         ).grid(row=1, column=1)
 
         LabelInput(
-            self, 'Seed Sample', variables['Seed Sample']
+            self,
+            'Seed Sample',
+            variables['Seed Sample'],
+            input_class=RequiredEntry
         ).grid(row=1, column=2)
 
 class EnvironmentInfo(LabeledFrame):
@@ -83,24 +96,33 @@ class EnvironmentInfo(LabeledFrame):
             self,
             self.HUMIDITY,
             variables[self.HUMIDITY],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0.5, 'to_': 52.0, 'increment': 0.01}
+            input_class=ValidatedSpinbox,
+            input_args={
+                'from_value': 0.5, 'to_value': 52.0, 'increment': 0.01
+            },
+            disable_var=variables[self.EQUIPMENT_FAULT]
         ).grid(row=0, column=0)
 
         LabelInput(
             self,
             self.LIGHT,
             variables[self.LIGHT],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0.0, 'to_': 100.0, 'increment': 0.01}
+            input_class=ValidatedSpinbox,
+            input_args={
+                'from_value': 0.0, 'to_value': 100.0, 'increment': 0.01
+            },
+            disable_var=variables[self.EQUIPMENT_FAULT]
         ).grid(row=0, column=1)
 
         LabelInput(
             self,
             self.TEMPERATURE,
             variables[self.TEMPERATURE],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 4.0, 'to_': 40.0, 'increment': 0.01}
+            input_class=ValidatedSpinbox,
+            input_args={
+                'from_value': 4.0, 'to_value': 40.0, 'increment': 0.01
+            },
+            disable_var=variables[self.EQUIPMENT_FAULT]
         ).grid(row=0, column=2)
 
         LabelInput(
@@ -124,48 +146,69 @@ class PlantInfo(LabeledFrame):
             self,
             'Plants',
             variables['Plants'],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0, 'to_': 20, 'increment': 1}
+            input_class=ValidatedSpinbox,
+            input_args={'from_value': 0, 'to_value': 20, 'increment': 1}
         ).grid(row=0, column=0)
 
         LabelInput(
             self,
             'Blossoms',
             variables['Blossoms'],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0, 'to_': 1000, 'increment': 1}
+            input_class=ValidatedSpinbox,
+            input_args={'from_value': 0, 'to_value': 1000, 'increment': 1}
         ).grid(row=0, column=1)
 
         LabelInput(
             self,
             'Fruit',
             variables['Fruit'],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0, 'to_': 1000, 'increment': 1}
+            input_class=ValidatedSpinbox,
+            input_args={'from_value': 0, 'to_value': 1000, 'increment': 1}
         ).grid(row=0, column=2)
+
+        min_height_var = tk.DoubleVar(value='-infinity')
+        max_height_var = tk.DoubleVar(value='infinity')
 
         LabelInput(
             self,
             self.MIN_HEIGHT,
             variables[self.MIN_HEIGHT],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0.0, 'to_': 1000.0, 'increment': 0.01}
+            input_class=ValidatedSpinbox,
+            input_args={
+                'from_value': 0.0,
+                'to_value': 1000.0,
+                'increment': 0.01,
+                'max_var': max_height_var,
+                'update_var': min_height_var
+            }
         ).grid(row=1, column=0)
 
         LabelInput(
             self,
             self.MAX_HEIGHT,
             variables[self.MAX_HEIGHT],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0.0, 'to_': 1000.0, 'increment': 0.01}
+            input_class=ValidatedSpinbox,
+            input_args={
+                'from_value': 0.0,
+                'to_value': 1000.0,
+                'increment': 0.01,
+                'min_var': min_height_var,
+                'update_var': max_height_var
+            }
         ).grid(row=1, column=1)
 
         LabelInput(
             self,
             self.MEDIAN_HEIGHT,
             variables[self.MEDIAN_HEIGHT],
-            input_class=ttk.Spinbox,
-            input_args={'from_': 0.0, 'to_': 1000.0, 'increment': 0.01}
+            input_class=ValidatedSpinbox,
+            input_args={
+                'from_value': 0.0,
+                'to_value': 1000.0,
+                'increment': 0.01,
+                'min_var': min_height_var,
+                'max_var': max_height_var
+            }
         ).grid(row=1, column=2)
 
 class ButtonBar(ttk.Frame):

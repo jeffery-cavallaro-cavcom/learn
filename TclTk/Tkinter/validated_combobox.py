@@ -13,7 +13,7 @@ from validator import Validator
 # pylint: disable=too-many-ancestors
 # pylint: disable=arguments-differ
 
-class ValidateCombobox(Validator, ttk.Combobox):
+class ValidatedCombobox(Validator, ttk.Combobox):
     """ A Validated Combobox """
     def validate_key(self, proposed, action, **kwargs):
         valid = True
@@ -55,7 +55,7 @@ class ValidateCombobox(Validator, ttk.Combobox):
 
 if __name__ == '__main__':
     root = tk.Tk()
-    entry = ValidateCombobox(
+    entry = ValidatedCombobox(
         root, values=['zero', 'one', 'two', 'three', 'four', 'five']
     )
     entry.pack()
