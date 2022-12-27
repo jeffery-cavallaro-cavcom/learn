@@ -60,11 +60,17 @@ class LabelInput(tk.Frame):
         if self.disable_var:
             self.disable_var.trace_add('write', self.on_disabled)
 
+        self.error_var = getattr(self.input, 'error_var', tk.StringVar())
+        ttk.Label(self, textvariable=self.error_var, **label_args).grid(
+            row=2, column=0, sticky=tk.W+tk.E
+        )
+
     def on_disabled(self, *_):
         if self.disable_var:
             if self.disable_var.get():
                 self.input.configure(state=tk.DISABLED)
                 self.value.set('')
+                self.error_var.set('')
             else:
                 self.input.configure(state=tk.NORMAL)
 
