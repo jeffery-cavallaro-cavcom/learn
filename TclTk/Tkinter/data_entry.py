@@ -273,11 +273,35 @@ class DataRecordForm(ttk.Frame):
 
     def on_reset(self):
         """ Reset all form fields """
+        lab = self.variables['Lab'].get()
+        time = self.variables['Time'].get()
+        technician = self.variables['Technician'].get()
+
+        try:
+            plot = self.variables['Plot'].get()
+        except tk.TclError:
+            plot = ''
+
+        plot_values = self.variables['Plot'].label_widget.input.cget('values')
+
         for variable in self.variables.values():
             if isinstance(variable, tk.BooleanVar):
                 variable.set(False)
             else:
                 variable.set('')
+
+        self.variables['Date'].set(datetime.today().strftime('%Y-%m-%d'))
+        self.variables['Time'].label_widget.input.focus()
+
+        if plot not in ('', 0, plot_values[-1]):
+            self.variables['Lab'].set(lab)
+            self.variables['Time'].set(time)
+            self.variables['Technician'].set(technician)
+
+            next_plot_index = plot_values.index(str(plot)) + 1
+            self.variables['Plot'].set(plot_values[next_plot_index])
+
+            self.variables['Seed Sample'].label_widget.input.focus()
 
     def get(self):
         """ Get all form data """
@@ -300,6 +324,18 @@ class DataRecordForm(ttk.Frame):
                     raise ValueError(message) from error
 
         return data
+
+    def get_errors(self):
+        errors = {}
+        for name, variable in self.variables.items():
+            input = variable.label_widget.input
+            error_var = variable.label_widget.error_var
+            if hasattr(input, 'trigger_validate_focusout'):
+                input.trigger_validate_focusout()
+            message = error_var.get()
+            if message:
+                errors[name] = message
+        return errors
 
 class Application(tk.Tk):
     """ Application Root Window """
@@ -325,6 +361,14 @@ class Application(tk.Tk):
 
     def on_save(self):
         """ Save the form values """
+        errors = self.record_form.get_errors()
+        if errors:
+            self.status.configure(foreground='red')
+            self.status_value.set(
+                f"Cannot save, error in fields: {', '.join(errors.keys())}"
+            )
+            return
+
         stamp = datetime.today().strftime('%Y-%m-%d')
         filename = Path(f"data_record_{stamp}.csv")
         is_new = not filename.exists()

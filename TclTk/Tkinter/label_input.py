@@ -24,6 +24,7 @@ class LabelInput(tk.Frame):
         input_args = input_args or {}
         label_args = label_args or {}
         self.value = textvariable
+        self.value.label_widget = self
 
         if input_class in (ttk.Checkbutton, ttk.Button):
             input_args['text'] = label
