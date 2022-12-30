@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-from validated_radio_group import ValidatedRadioGroup
+from widgets.validated_radio_group import ValidatedRadioGroup
 
 class LabelInput(tk.Frame):
     """ Label plus Input Widget """
