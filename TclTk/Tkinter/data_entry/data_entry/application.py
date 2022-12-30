@@ -6,13 +6,19 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 from model import CSVModel
-from view import DataRecordForm
+from view import DataRecordForm, LoginDialog
 
 class Application(tk.Tk):
     """ Main Application Class """
     def __init__(self, *args, **kwargs):
         """ Create the application """
         super().__init__(*args, **kwargs)
+
+        self.withdraw()
+        if not self.show_login():
+            self.destroy()
+            return
+        self.deiconify()
 
         self.title('Data Entry')
         self.columnconfigure(0, weight=1)
@@ -81,3 +87,20 @@ class Application(tk.Tk):
     def on_quit(self, *_):
         """ Quit the main loop """
         self.quit()
+
+    def show_login(self):
+        error = ''
+        title = 'Data Entry Login'
+
+        while True:
+            login = LoginDialog(self, title, error)
+            if not login.result:
+                return False
+            username, password = login.result
+            if self.simple_login(username, password):
+                return True
+            error = 'Login Failed'
+
+    @staticmethod
+    def simple_login(username, password):
+        return (username == 'admin') and (password == 'data')

@@ -3,6 +3,7 @@
 from datetime import datetime
 import tkinter as tk
 from tkinter import ttk
+from tkinter.simpledialog import Dialog
 
 from model import FIELDS
 from constants import FieldType as FT
@@ -261,3 +262,54 @@ class DataRecordForm(ttk.Frame):
             if message:
                 errors[name] = message
         return errors
+
+class LoginDialog(Dialog):
+    """ A username/password dialog """
+    def __init__(self, parent, title, error=None):
+        self.username = tk.StringVar()
+        self.password = tk.StringVar()
+        self.error = tk.StringVar(value=error or '')
+
+        super().__init__(parent, title)
+
+    def body(self, frame):
+        ttk.Label(frame, text='Date Entry Login').grid(row=0)
+
+        username = LabelInput(
+            frame,
+            'Username:',
+            self.username,
+            input_class=RequiredEntry
+        )
+        username.grid()
+
+        LabelInput(
+            frame,
+            'Password:',
+            self.password,
+            input_class=RequiredEntry,
+            input_args={'show': '*'}
+        ).grid()
+
+        if self.error.get():
+            ttk.Label(frame, textvariable=self.error).grid()
+
+        return username
+
+    def buttonbox(self):
+        box = ttk.Frame(self)
+
+        login_button = ttk.Button(box, text="Login", command=self.ok)
+        login_button.grid(row=0, column=0, padx=5, pady=5)
+
+        cancel_button = ttk.Button(box, text="Cancel", command=self.cancel)
+        cancel_button.grid(row=0, column=1, padx=5, pady=5)
+
+        self.bind('<Return>', self.ok)
+        self.bind('<Escape>', self.cancel)
+
+        box.pack()
+
+    def apply(self):
+        self.result = (self.username.get(), self.password.get())
+    
