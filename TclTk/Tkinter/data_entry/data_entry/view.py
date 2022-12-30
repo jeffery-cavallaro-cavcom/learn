@@ -161,17 +161,18 @@ class ButtonBar(ttk.Frame):
 
         self.grid(sticky=tk.W + tk.E)
 
-        ttk.Button(
-            self, text='Quit', command=self.master.master.quit
-        ).pack(side=tk.RIGHT)
+        ttk.Button(self, text='Quit', command=self.on_quit).pack(side=tk.RIGHT)
+        ttk.Button(self, text='Save', command=self.on_save).pack(side=tk.RIGHT)
+        ttk.Button(self, text='Reset', command=self.on_reset).pack(side=tk.RIGHT)
 
-        ttk.Button(
-            self, text='Save', command=self.master.master.on_save
-        ).pack(side=tk.RIGHT)
+    def on_reset(self):
+        self.event_generate('<<Reset>>')
 
-        ttk.Button(
-            self, text='Reset', command=self.master.on_reset
-        ).pack(side=tk.RIGHT)
+    def on_save(self):
+        self.event_generate('<<SaveRecord>>')
+
+    def on_quit(self):
+        self.event_generate('<<Quit>>')
 
 class DataRecordForm(ttk.Frame):
     """ All of the form data """
@@ -196,9 +197,10 @@ class DataRecordForm(ttk.Frame):
             input_args={'width': 75, 'height': 10}
         ).grid()
 
-        ButtonBar(self)
+        self.buttons = ButtonBar(self)
+        self.buttons.bind('<<Reset>>', self.on_reset)
 
-    def on_reset(self):
+    def on_reset(self, *_):
         """ Reset all form fields """
         lab = self.variables['Lab'].get()
         time = self.variables['Time'].get()

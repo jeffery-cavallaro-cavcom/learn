@@ -29,7 +29,10 @@ class Application(tk.Tk):
         self.records_saved = 0
         self.model = CSVModel()
 
-    def on_save(self):
+        self.record_form.buttons.bind('<<SaveRecord>>', self.on_save)
+        self.record_form.buttons.bind('<<Quit>>', self.on_quit)
+
+    def on_save(self, *_):
         """ Save the form values """
         errors = self.record_form.get_errors()
         if errors:
@@ -54,3 +57,7 @@ class Application(tk.Tk):
         )
 
         self.record_form.on_reset()
+
+    def on_quit(self, *_):
+        """ Quit the main loop """
+        self.quit()
