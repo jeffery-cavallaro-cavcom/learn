@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 from model import CSVModel
 from view import DataRecordForm
@@ -40,6 +41,14 @@ class Application(tk.Tk):
             self.status_value.set(
                 f"Cannot save, error in fields: {', '.join(errors.keys())}"
             )
+
+            message = 'Cannot save record'
+            detail = (
+                'The following fields have errors:'
+                "\n  * {}".format('\n  * '.join(errors.keys()))
+            )
+            messagebox.showerror(title='Error', message=message, detail=detail)
+
             return
 
         try:
