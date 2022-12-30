@@ -111,10 +111,12 @@ FIELDS = {
 
 class CSVModel:
     """ CSV Output File Model """
-    def __init__(self):
+    def __init__(self, filename=None):
         """ Initialize output CSV file """
-        stamp = datetime.today().strftime(DATE_FORMAT)
-        self.filename = Path(f"data_record_{stamp}.csv")
+        if not filename:
+            stamp = datetime.today().strftime(DATE_FORMAT)
+            filename = Path(f"data_record_{stamp}.csv")
+        self.filename = Path(filename)
         is_new = not self.filename.exists()
 
         with open(

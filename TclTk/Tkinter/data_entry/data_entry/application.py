@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog
 from tkinter import messagebox
 
 from model import CSVModel
@@ -32,6 +33,16 @@ class Application(tk.Tk):
 
         self.record_form.buttons.bind('<<SaveRecord>>', self.on_save)
         self.record_form.buttons.bind('<<Quit>>', self.on_quit)
+
+    def on_file_select(self, *_):
+        """ Select an output CSV file """
+        filename = filedialog.asksaveasfilename(
+            title='Select the target file for saving records',
+            defaultextension='.csv',
+            filetypes=[('CSV', '*.csv *.CSV')]
+        )
+        if filename:
+            self.model = CSVModel(filename)
 
     def on_save(self, *_):
         """ Save the form values """
