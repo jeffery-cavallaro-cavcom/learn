@@ -7,6 +7,7 @@ from enum import Enum, auto
 from widgets.iso_date_entry import ISODateEntry
 
 class FieldType(Enum):
+    """ Field Types """
     STRING = auto()
     STRING_LIST = auto()
     SHORT_STRING_LIST = auto()

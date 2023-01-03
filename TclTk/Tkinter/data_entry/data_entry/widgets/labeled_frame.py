@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+# pylint: disable=too-many-ancestors
+
 class LabeledFrame(ttk.LabelFrame):
     """ Frame with Label and Border """
     def __init__(self, parent, label, columns=3):

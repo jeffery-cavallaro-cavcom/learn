@@ -7,6 +7,7 @@ from tkinter import messagebox
 
 from model import CSVModel
 from view import DataRecordForm, LoginDialog
+from mainmenu import MainMenu
 
 class Application(tk.Tk):
     """ Main Application Class """
@@ -23,12 +24,27 @@ class Application(tk.Tk):
         self.title('Data Entry')
         self.columnconfigure(0, weight=1)
 
+        event_callbacks = {
+            '<<FileSelect>>': self.on_file_select,
+            '<<FileQuit>>': lambda _: self.quit()
+        }
+        for sequence, callback in event_callbacks.items():
+            self.bind(sequence, callback)
+
+        self.settings = {
+            'autofill date': tk.BooleanVar(value=True),
+            'autofill sheet data': tk.BooleanVar(value=True)
+        }
+
+        menu = MainMenu(self, self.settings)
+        self.configure(menu=menu)
+
         ttk.Label(
             self, text='Lab Data Entry', font=('TkDefaultFont', 16)
         ).grid(row=0)
 
         self.status_value = tk.StringVar()
-        self.record_form = DataRecordForm(self)
+        self.record_form = DataRecordForm(self, self.settings)
         self.record_form.grid(row=1, padx=10, sticky=tk.W + tk.E)
 
         self.status = ttk.Label(self, textvariable=self.status_value)
@@ -68,6 +84,7 @@ class Application(tk.Tk):
 
             return
 
+        # pylint: disable=broad-except
         try:
             data = self.record_form.get()
             self.model.save_record(data)
@@ -89,6 +106,7 @@ class Application(tk.Tk):
         self.quit()
 
     def show_login(self):
+        """ Run the login dialog """
         error = ''
         title = 'Data Entry Login'
 
@@ -103,4 +121,5 @@ class Application(tk.Tk):
 
     @staticmethod
     def simple_login(username, password):
+        """ Overly simple authentication """
         return (username == 'admin') and (password == 'data')

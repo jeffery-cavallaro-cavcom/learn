@@ -30,6 +30,8 @@ FIELD_TYPES = {
     FT.BOOLEAN: (ttk.Checkbutton, tk.BooleanVar)
 }
 
+# pylint: disable=too-many-ancestors
+
 class FormField(LabelInput):
     """ Match Form Field to Labeled Widget """
     def __init__(self, parent, name, model, variables, **kwargs):
@@ -167,24 +169,28 @@ class ButtonBar(ttk.Frame):
         ttk.Button(self, text='Reset', command=self.on_reset).pack(side=tk.RIGHT)
 
     def on_reset(self):
+        """ Generate reset event """
         self.event_generate('<<Reset>>')
 
     def on_save(self):
+        """ Generate save event """
         self.event_generate('<<SaveRecord>>')
 
     def on_quit(self):
+        """ Generate quit event """
         self.event_generate('<<Quit>>')
 
 class DataRecordForm(ttk.Frame):
     """ All of the form data """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, parent, settings, *args, **kwargs):
         """ Construct the form """
-        super().__init__(*args, **kwargs)
+        super().__init__(parent, *args, **kwargs)
 
         self.variables = {
             name: FIELD_TYPES[spec.type][1]()
             for name, spec in FIELDS.items()
         }
+        self.settings = settings
 
         RecordInfo(self, self.variables)
         EnvironmentInfo(self, self.variables)
@@ -220,10 +226,14 @@ class DataRecordForm(ttk.Frame):
             else:
                 variable.set('')
 
-        self.variables['Date'].set(datetime.today().strftime(DATE_FORMAT))
-        self.variables['Time'].label_widget.input.focus()
+        if self.settings['autofill date'].get():
+            self.variables['Date'].set(datetime.today().strftime(DATE_FORMAT))
+            self.variables['Time'].label_widget.input.focus()
 
-        if plot not in ('', 0, plot_values[-1]):
+        if (
+            self.settings['autofill sheet data'].get() and
+            plot not in ('', 0, plot_values[-1])
+        ):
             self.variables['Lab'].set(lab)
             self.variables['Time'].set(time)
             self.variables['Technician'].set(technician)
@@ -252,12 +262,13 @@ class DataRecordForm(ttk.Frame):
         return data
 
     def get_errors(self):
+        """ Get all errors """
         errors = {}
         for name, variable in self.variables.items():
-            input = variable.label_widget.input
+            input_widget = variable.label_widget.input
             error_var = variable.label_widget.error_var
-            if hasattr(input, 'trigger_validate_focusout'):
-                input.trigger_validate_focusout()
+            if hasattr(input_widget, 'trigger_validate_focusout'):
+                input_widget.trigger_validate_focusout()
             message = error_var.get()
             if message:
                 errors[name] = message
@@ -266,17 +277,19 @@ class DataRecordForm(ttk.Frame):
 class LoginDialog(Dialog):
     """ A username/password dialog """
     def __init__(self, parent, title, error=None):
+        """ Create dialog """
         self.username = tk.StringVar()
         self.password = tk.StringVar()
         self.error = tk.StringVar(value=error or '')
 
         super().__init__(parent, title)
 
-    def body(self, frame):
-        ttk.Label(frame, text='Date Entry Login').grid(row=0)
+    def body(self, master):
+        """ Create dialog body """
+        ttk.Label(master, text='Date Entry Login').grid(row=0)
 
         username = LabelInput(
-            frame,
+            master,
             'Username:',
             self.username,
             input_class=RequiredEntry
@@ -284,7 +297,7 @@ class LoginDialog(Dialog):
         username.grid()
 
         LabelInput(
-            frame,
+            master,
             'Password:',
             self.password,
             input_class=RequiredEntry,
@@ -292,11 +305,12 @@ class LoginDialog(Dialog):
         ).grid()
 
         if self.error.get():
-            ttk.Label(frame, textvariable=self.error).grid()
+            ttk.Label(master, textvariable=self.error).grid()
 
         return username
 
     def buttonbox(self):
+        """ Create dialog button bar """
         box = ttk.Frame(self)
 
         login_button = ttk.Button(box, text="Login", command=self.ok)
@@ -311,5 +325,6 @@ class LoginDialog(Dialog):
         box.pack()
 
     def apply(self):
+        """ Apply results """
         self.result = (self.username.get(), self.password.get())
     

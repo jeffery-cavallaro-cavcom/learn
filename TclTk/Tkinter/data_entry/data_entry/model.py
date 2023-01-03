@@ -58,6 +58,7 @@ FIELDS = {
     ),
     'Temperature': Field(
         type=FT.DECIMAL,
+        # pylint: disable=consider-using-f-string
         label="Temperature ({}C)".format('\u00B0'),
         min_value=4.0,
         max_value=40.0,
@@ -111,6 +112,7 @@ FIELDS = {
 
 class CSVModel:
     """ CSV Output File Model """
+    # pylint: disable=too-few-public-methods
     def __init__(self, filename=None):
         """ Initialize output CSV file """
         if not filename:

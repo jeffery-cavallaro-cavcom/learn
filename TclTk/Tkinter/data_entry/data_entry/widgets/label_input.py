@@ -67,6 +67,7 @@ class LabelInput(tk.Frame):
         )
 
     def on_disabled(self, *_):
+        """ Modify disabled state """
         if self.disable_var:
             if self.disable_var.get():
                 self.input.configure(state=tk.DISABLED)

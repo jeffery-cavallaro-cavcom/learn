@@ -5,6 +5,7 @@ import tkinter as tk
 class Application(tk.Tk):
     """ Main Application """
     def __init__(self):
+        """ Create the menu """
         super().__init__()
         self.geometry('200x150')
         self.title('Menu Demonstration')
@@ -45,6 +46,7 @@ class Application(tk.Tk):
         self.configure(menu=main_menu)
 
     def set_font(self, *_):
+        """ Apply font settings """
         size = self.font_size.get()
         weight = 'bold' if self.font_bold.get() else ''
         self.label.configure(font=f"TkDefaultFont {size} {weight}")

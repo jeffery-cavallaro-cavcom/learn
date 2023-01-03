@@ -52,6 +52,7 @@ class ValidatedSpinbox(Validator, ttk.Spinbox):
     # pylint: disable=too-many-arguments
 
     def validate_key(self, char, index, current, proposed, action, **kwargs):
+        """ Validate keystrokes """
         if action == '0':
             return True
 
@@ -86,6 +87,7 @@ class ValidatedSpinbox(Validator, ttk.Spinbox):
         return True
 
     def validate_focusout(self, **kwargs):
+        """ Validate focusout event """
         value = self.get()
         if not value:
             self.error_var.set('A numeric value is required')
@@ -111,11 +113,13 @@ class ValidatedSpinbox(Validator, ttk.Spinbox):
         return True
 
     def on_focusout(self, *_):
+        """ Focusout event handler """
         value = self.get()
         if self.update_var and not self.error_var.get():
             self.update_var.set(value)
 
     def set_minimum(self, *_):
+        """ Set the minimum allowed value """
         current = self.get()
 
         try:
@@ -132,6 +136,7 @@ class ValidatedSpinbox(Validator, ttk.Spinbox):
         self.trigger_validate_focusout()
 
     def set_maximum(self, *_):
+        """ Set the maximum allowed value """
         current = self.get()
 
         try:
