@@ -5,7 +5,7 @@ from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 
-from model import CSVModel
+from model import CSVModel, SettingsModel
 from view import DataRecordForm, LoginDialog
 from mainmenu import MainMenu
 
@@ -31,10 +31,9 @@ class Application(tk.Tk):
         for sequence, callback in event_callbacks.items():
             self.bind(sequence, callback)
 
-        self.settings = {
-            'autofill date': tk.BooleanVar(value=True),
-            'autofill sheet data': tk.BooleanVar(value=True)
-        }
+        self.settings_model = SettingsModel()
+        self.settings = {}
+        self.load_settings()
 
         menu = MainMenu(self, self.settings)
         self.configure(menu=menu)
@@ -123,3 +122,22 @@ class Application(tk.Tk):
     def simple_login(username, password):
         """ Overly simple authentication """
         return (username == 'admin') and (password == 'data')
+
+    def load_settings(self):
+        """ Load the current settings """
+        variable_types = {
+            'bool': tk.BooleanVar
+        }
+
+        for name, data in self.settings_model.fields.items():
+            variable_type = variable_types.get(data['type'], tk.StringVar)
+            self.settings[name] = variable_type(value=data['value'])
+
+        for variable in self.settings.values():
+            variable.trace_add('write', self.save_settings)
+
+    def save_settings(self, *_):
+        """ Save the current settings """
+        for name, variable in self.settings.items():
+            self.settings_model.set(name, variable.get())
+        self.settings_model.save()
