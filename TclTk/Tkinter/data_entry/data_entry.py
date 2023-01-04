@@ -8,6 +8,7 @@ import sys
 PARENT = Path(__file__).parent
 sys.path = [
     str(PARENT / 'data_entry'),
+    str(PARENT / 'data_entry' / 'models'),
     str(PARENT / 'data_entry' / 'widgets'),
     *sys.path
 ]

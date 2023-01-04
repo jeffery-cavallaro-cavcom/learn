@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.simpledialog import Dialog
 
-from model import FIELDS
+from models.csv_file import FIELDS
 from constants import FieldType as FT
 from constants import DATE_FORMAT
 

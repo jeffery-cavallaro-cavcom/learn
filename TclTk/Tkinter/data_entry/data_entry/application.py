@@ -5,7 +5,8 @@ from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 
-from model import CSVModel, SettingsModel
+from models.settings import SettingsModel
+from models.csv_file import CSVModel
 from view import DataRecordForm, LoginDialog
 from mainmenu import MainMenu
 
