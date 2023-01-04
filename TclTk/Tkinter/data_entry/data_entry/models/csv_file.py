@@ -119,19 +119,56 @@ class CSVModel:
             stamp = datetime.today().strftime(DATE_FORMAT)
             filename = Path(f"data_record_{stamp}.csv")
         self.filename = Path(filename)
-        is_new = not self.filename.exists()
 
-        with open(
-            self.filename, 'a', newline='', encoding=sys.getdefaultencoding()
-        ) as out:
-            writer = csv.DictWriter(out, fieldnames=FIELDS.keys())
-            if is_new:
-                writer.writeheader()
+    def open_file(self, clear=False):
+        """ Open the output file """
+        mode = 'w' if clear else 'a'
+        is_new = clear or not self.filename.exists()
 
-    def save_record(self, record):
+        csvfile = open(
+            self.filename, mode, newline='', encoding=sys.getdefaultencoding()
+        )
+        if is_new:
+            writer = csv.DictWriter(csvfile, fieldnames=FIELDS.keys())
+            writer.writeheader()
+
+        return csvfile
+
+    def get_all_records(self):
+        """ Read all file records """
+        if not self.filename.exists():
+            return []
+
+        with open(self.filename, 'r') as csvfile:
+            csvreader = csv.DictReader(csvfile)
+            missing = set(FIELDS.keys()) - set(csvreader.fieldnames)
+            if len(missing) > 0:
+                missing = ', '.join(missing)
+                raise Exception(f"File is missing fields: {missing}")
+            records = list(csvreader)
+
+        bool_fields = [
+            name for name, spec in FIELDS.items() if spec['type'] == FT.BOOLEAN
+        ]
+        for record in records:
+            for name in bool_fields:
+                record[name] = record[name].lower == 'true'
+
+        return records
+
+    def get_record(self, row):
+        """ Get record by row number """
+        return self.get_all_records()[row]
+
+    def save_record(self, record, row=None):
         """ Save a new data record """
-        with open(
-            self.filename, 'a', newline='', encoding=sys.getdefaultencoding()
-        ) as out:
-            writer = csv.DictWriter(out, fieldnames=FIELDS.keys())
-            writer.writerow(record)
+        if row is None:
+            with self.open_file() as out:
+                writer = csv.DictWriter(out, fieldnames=FIELDS.keys())
+                writer.writerow(record)
+        else:
+            records = self.get_all_records()
+            records[row] = record
+            with self.open_file(clear=True):
+                writer = csv.DictWriter(out, fieldnames=FIELDS.keys())
+                writer.writerows(records)
