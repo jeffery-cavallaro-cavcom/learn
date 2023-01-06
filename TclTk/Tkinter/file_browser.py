@@ -14,6 +14,9 @@ class Application(tk.Tk):
         self.browser = self.make_browser()
         self.browser.pack()
 
+        self.status = tk.StringVar()
+        tk.Label(self, textvariable=self.status).pack(side=tk.BOTTOM)
+
         for path in paths:
             status = path.stat()
             parent = str(path.parent)
@@ -45,6 +48,9 @@ class Application(tk.Tk):
                 cid, command=lambda column=cid: self.sort_column(column)
             )
 
+        browser.bind('<<TreeviewOpen>>', self.show_directory_stats)
+        browser.bind('<<TreeviewClose>>', lambda _: self.status.set(''))
+
         return browser
 
     def sort_column(self, column, parent='', reverse=False):
@@ -68,6 +74,13 @@ class Application(tk.Tk):
         for index, (_, iid) in enumerate(sort_index):
             self.browser.move(iid, parent, index)
             self.sort_column(column, parent=iid, reverse=reverse)
+
+    def show_directory_stats(self, *_):
+        """ Display selected directory information """
+        clicked_path = Path(self.browser.focus())
+        num_children = len(list(clicked_path.iterdir()))
+        message = f"Directory: {clicked_path.name}, {num_children} children"
+        self.status.set(message)
 
 if __name__ == '__main__':
     Application().mainloop()
