@@ -2,19 +2,16 @@ CXX=g++
 
 CXXFLAGS=-g -Wall --std=c++17
 
-PROGRAMS=hello add2 average bomb
+PROGRAMS=add2 average bomb hello
 
 SOURCES=*.cc
 
 all: $(PROGRAMS)
 
-hello: hello.cc
-
 add2: add2.cc
-
 average: average.cc
-
 bomb: bomb.cc
+hello: hello.cc
 
 lint:
 	@cpplint $(SOURCES)
