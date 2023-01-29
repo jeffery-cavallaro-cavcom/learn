@@ -2,12 +2,13 @@ CXX=g++
 
 CXXFLAGS=-g -Wall --std=c++17
 
-PROGRAMS=types
+PROGRAMS=conversions types
 
 SOURCES=*.cc
 
 all: $(PROGRAMS)
 
+conversions: conversions.cc
 types: types.cc
 
 lint:
