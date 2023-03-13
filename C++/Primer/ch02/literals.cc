@@ -2,18 +2,7 @@
  * Demonstrates the use of literals.
 */
 
-#include <iomanip>
 #include <iostream>
-
-void show_bytes(const void *value, std::size_t length) {
-    const unsigned char *bytes = reinterpret_cast<const unsigned char *>(value);
-    for (unsigned int ui = 0; ui < length; ++ui) {
-        if (ui > 0) std::cout << ' ';
-        unsigned int uc = bytes[ui];
-        std::cout << std::hex << std::setw(2) << std::setfill('0') << uc;
-    }
-    std::cout << std::endl;
-}
 
 int main(int argc, char *argv[]) {
     // Integer values.
@@ -75,14 +64,12 @@ int main(int argc, char *argv[]) {
     std::cout << "Size of U\"a\": " << sizeof(U"a") << std::endl;
     std::cout << "Size of u8\"a\": " << sizeof(u8"a") << std::endl;
 
-    // String forms:
-    const char cc[] = "Hasta manana!";
-    std::cout << "\"" << cc << "\": ";
-    show_bytes(cc, sizeof(cc));
+    // Booleans:
+    std::cout << std::noboolalpha << true << std::endl;
+    std::cout << std::boolalpha << true << std::endl;
 
-    const wchar_t lc[] = L"\u00A1Hasta ma\u00F1ana!";
-    std::wcout << L"\"" << lc << L"\": ";
-    show_bytes(lc, sizeof(lc));
+    std::cout << std::noboolalpha << false << std::endl;
+    std::cout << std::boolalpha << false << std::endl;
 
     return 0;
 }

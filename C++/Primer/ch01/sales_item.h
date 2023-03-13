@@ -1,5 +1,5 @@
-#ifndef __SALES_ITEM_H__
-#define __SALES_ITEM_H__
+#ifndef SALES_ITEM_H_
+#define SALES_ITEM_H_
 
 /**
  * Sales Item
@@ -46,4 +46,4 @@ class SalesItem {
 std::ostream &operator<<(std::ostream &out, const SalesItem &item);
 std::istream &operator>>(std::istream &in, SalesItem &item);
 
-#endif  // __SALES_ITEM_H__
+#endif  // SALES_ITEM_H_
