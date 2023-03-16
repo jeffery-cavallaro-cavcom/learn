@@ -34,5 +34,36 @@ int main(int argc, char *argv[]) {
     *pi = 123;
     std::cout << "i=" << i << " *rpi=" << *rpi << std::endl;
 
+    // reference to const:
+    const int &cri = i;
+    std::cout << "i=" << i << " ri=" << ri << " cri=" << cri << std::endl;
+    ri = 1024;
+    std::cout << "i=" << i << " ri=" << ri << " cri=" << cri << std::endl;
+
+    // temporary use:
+    double pie = 3.14;
+    const int &pii = pie;
+    std::cout << "pie=" << pie << " pii=" << pii << std::endl;
+    pie *= 2;
+    std::cout << "pie=" << pie << " pii=" << pii << std::endl;
+
+    // pointer to const:
+    const double *cpie = &pie;
+    std::cout << "pie=" << pie << " *cpie=" << *cpie << std::endl;
+    pie /= 2;
+    std::cout << "pie=" << pie << " *cpie=" << *cpie << std::endl;
+
+    // const pointer:
+    int *const cpi = &i;
+    std::cout << "i=" << i << " *cpi=" << *cpi << std::endl;
+    *cpi = 100;
+    std::cout << "i=" << i << " *cpi=" << *cpi << std::endl;
+
+    // const pointer to const:
+    const int *const cpci = &i;
+    std::cout << "i=" << i << " *cpci=" << *cpci << std::endl;
+    i = 5;
+    std::cout << "i=" << i << " *cpci=" << *cpci << std::endl;
+
     return 0;
 }

@@ -16,7 +16,15 @@ SOURCES = \
 	scope.cc \
 	compound.cc
 
-PROGRAMS = conversions literals types strings variables scope compound
+PROGRAMS = \
+	conversions \
+	literals \
+	types \
+	strings \
+	variables \
+	scope \
+	compound \
+	temptest
 
 LIBRARIES =
 
@@ -29,6 +37,7 @@ strings: strings.o
 variables: variables.o numbers.o
 scope: scope.o
 compound: compound.o
+temptest: temptest.o
 
 lint:
 	cpplint --root=. *.cc

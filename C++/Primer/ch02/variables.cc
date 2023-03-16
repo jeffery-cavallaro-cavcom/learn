@@ -6,6 +6,8 @@
 
 extern double pi;  // declaration
 extern double euler;  // declaration
+const int value_one = 11;  // local
+extern const int value_two;  // declaration
 
 int i0;  // Default initialized to 0.
 
@@ -26,6 +28,9 @@ int main(int argc, char *argv[]) {
 
     std::cout << "pi=" << pi << std::endl;
     std::cout << "e=" << euler << std::endl;
+
+    std::cout << "value_one=" << value_one << std::endl;
+    std::cout << "value_two=" << value_two << std::endl;
 
     return 0;
 }
