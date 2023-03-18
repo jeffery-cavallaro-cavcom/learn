@@ -8,6 +8,8 @@ import socket
 import selectors
 from typing import ClassVar
 
+from utils.listener import listener
+
 @dataclass
 class ClientConnection:
     """ A single client connection """
@@ -24,10 +26,7 @@ class EchoServer(socket.socket):
     def __init__(self):
         """ Create a listening socket """
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
-        self.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.setblocking(False)
-        self.bind(self.ADDR)
-        self.listen()
+        listener(self, self.ADDR)
 
         self.connections = {}
         self.selector = selectors.DefaultSelector()
