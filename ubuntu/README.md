@@ -216,11 +216,11 @@ install a new MOK.
 |NAME|VALUE|
 |----|-----|
 |Username|jeffery@cavcom.com|
-|IMAP Server|mail.cavcom.com|
+|IMAP Server|netsol-imap-oxcs.hostingplatform.com|
 |IMAP Port|993|
 |IMAP Connection Security|SSL/TLS|
 |IMAP Authentication Method|Normal Password|
-|SMTP Server|smtp.cavcom.com|
+|SMTP Server|netsol-imap-oxcs.hostingplatform.com|
 |SMTP Port|587|
 |SMTP Connection Security|STARTTLS|
 |SMTP Authentication Method|Encrypted Password|
