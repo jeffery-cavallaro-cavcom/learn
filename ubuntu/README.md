@@ -182,6 +182,18 @@ This is the LaTeX distribution that I use for all of my math papers.
 
 ## Docker
 
+Docker uses the following ports.  Note that the encrypted and unencrypted port
+numbers are used only if the client and server are communicating over a TCP
+socket as opposed to a domain socket (`/var/run/docker.sock`).
+
+| PORT | USE |
+|---|---|
+| 2375 | Unencrypted |
+| 2376 | Encrypted |
+| 2377 | Swarm |
+
+Installation is as follows:
+
 1. Install curl:
 ``` bash
 apt-get install curl
@@ -208,6 +220,10 @@ apt-get install \
 ```
 1. Add users to the `docker` group so that they can access the domain socket
    used for docker client/server communication.
+1. Test the installation:
+``` bash
+docker run hello-world
+```
 
 ## Virtualbox
 
